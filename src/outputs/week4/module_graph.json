@@ -1,0 +1,3338 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/eslint.config.js",
+      "language": "javascript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 55,
+      "imports": [
+        "import js from '@eslint/js';",
+        "import globals from 'globals';",
+        "import reactHooks from 'eslint-plugin-react-hooks';",
+        "import reactRefresh from 'eslint-plugin-react-refresh';",
+        "import typescriptEslint from '@typescript-eslint/eslint-plugin';",
+        "import typescriptParser from '@typescript-eslint/parser';",
+        "import prettier from 'eslint-plugin-prettier';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.09090909090909091,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/eslint.config.js"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/vite.config.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 22,
+      "imports": [
+        "import { defineConfig } from 'vite';",
+        "import react from '@vitejs/plugin-react';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.09090909090909091,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/vite.config.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/App.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 33,
+      "imports": [
+        "import { ThemeProvider } from '@mui/material/styles';",
+        "import CssBaseline from '@mui/material/CssBaseline';",
+        "import { ToastProvider } from './components/organisms/ToastProvider';",
+        "import { Provider } from 'react-redux';",
+        "import { store } from './lib/store';",
+        "import { useTranslation } from 'react-i18next';",
+        "import AppRoutes from './routes/Routes';",
+        "import theme from './themes/theme';",
+        "import './i18n';",
+        "import { useEffect } from 'react';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/App.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/main.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 11,
+      "imports": [
+        "import { StrictMode } from 'react';",
+        "import { createRoot } from 'react-dom/client';",
+        "import './index.css';",
+        "import App from './App.tsx';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/main.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/debounce.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 22,
+      "imports": [],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.09090909090909091,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/debounce.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/i18n.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 18,
+      "imports": [
+        "import i18n from 'i18next';",
+        "import { initReactI18next } from 'react-i18next';",
+        "import en from '../src/locales/en.json';",
+        "import de from '../src/locales/de.json';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/i18n.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/vite-env.d.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 16,
+      "imports": [
+        "import { defineConfig, loadEnv } from 'vite';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.3125,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/vite-env.d.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/contexts/toastContext.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 13,
+      "imports": [
+        "import { createContext } from 'react';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/contexts/toastContext.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/layouts/AuthLayout.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 49,
+      "imports": [
+        "import { Outlet } from 'react-router';",
+        "import { Box, Container, Paper, Typography } from '@mui/material';",
+        "import { useTranslation } from 'react-i18next';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.02040816326530612,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/layouts/AuthLayout.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/layouts/DashoboardLayout.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 48,
+      "imports": [
+        "import { useState, useEffect } from 'react';",
+        "import { styled } from '@mui/material/styles';",
+        "import { Outlet, useLocation } from 'react-router';",
+        "import { SideNav } from '../components/organisms/SideNav';",
+        "import { TopNav } from '../components/organisms/TopNav';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/layouts/DashoboardLayout.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 5,
+      "imports": [
+        "import { useContext } from 'react';",
+        "import { ToastContext } from '../contexts/toastContext';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useAuth.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 20,
+      "imports": [
+        "import { useState, useEffect } from 'react';",
+        "import { onAuthStateChanged, User } from 'firebase/auth';",
+        "import { auth } from '../lib/auth/firebase';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useAuth.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useEpisodeOptions.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 164,
+      "imports": [
+        "import { useCallback } from 'react';",
+        "import { QuestionSchema } from '../types/schema/question';",
+        "import { EpisodeSchema } from '../types/schema/episode';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.06097560975609756,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useEpisodeOptions.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useFirebase.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 23,
+      "imports": [
+        "import {\n  signInWithEmailAndPassword,\n  createUserWithEmailAndPassword,\n  sendPasswordResetEmail,\n} from 'firebase/auth';",
+        "import { auth } from '../lib/auth/firebase';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useFirebase.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/utils.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 15,
+      "imports": [
+        "import { toast } from 'react-toastify';",
+        "import { parseISO, format } from 'date-fns';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/utils.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/videoHelpers.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 83,
+      "imports": [],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.060240963855421686,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/videoHelpers.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/store.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 15,
+      "imports": [
+        "import { configureStore } from '@reduxjs/toolkit';",
+        "import { showSlice } from '../redux/features/showSlice';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/store.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/axiosClient.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 36,
+      "imports": [
+        "import axios from 'axios';",
+        "import { signOutUser } from '../services/auth/authService';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.05555555555555555,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/axiosClient.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/Dashboard.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 17,
+      "imports": [
+        "import React from 'react';",
+        "import { Box } from '@mui/material';",
+        "import BreadcrumbsNav from '../components/organisms/BreadcrumbsNav';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/Dashboard.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/UnauthorizedPage.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 40,
+      "imports": [
+        "import React from 'react';",
+        "import { Box, Typography, Button } from '@mui/material';",
+        "import { useNavigate } from 'react-router';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/UnauthorizedPage.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/NotFound.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 44,
+      "imports": [
+        "import { Box, Typography, Button } from '@mui/material';",
+        "import { useNavigate } from 'react-router';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.022727272727272728,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/NotFound.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/themes/theme.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 71,
+      "imports": [
+        "import { createTheme } from '@mui/material/styles';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.08450704225352113,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/themes/theme.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/ProtectdRoute.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 34,
+      "imports": [
+        "import React from 'react';",
+        "import { Navigate, Outlet } from 'react-router';",
+        "import { useAuth } from '../hooks/useAuth';",
+        "import SkeletonLoading from '../components/organisms/SkeletonLoading';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.058823529411764705,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/ProtectdRoute.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 75,
+      "imports": [
+        "import { Suspense } from 'react';",
+        "import { BrowserRouter as Router, Routes, Route } from 'react-router';",
+        "import Login from '../pages/auth/Login';",
+        "import ShowsPage from '../pages/shows/Shows';",
+        "import EpisodesPage from '../pages/episodes/Episodes';",
+        "import SlidersPage from '../pages/sliders/Sliders';",
+        "import LoginLayout from '../layouts/AuthLayout';",
+        "import { DashboardLayout } from '../layouts/DashoboardLayout';",
+        "import DashboardPage from '../pages/Dashboard';",
+        "import { NotFoundPage } from '../pages/NotFound';",
+        "import UnauthorizedPage from '../pages/UnauthorizedPage';",
+        "import ProtectedRoute from './ProtectdRoute';",
+        "import GenresPage from '../pages/genres/Genres';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.013333333333333334,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/types.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 106,
+      "imports": [
+        "import { GenreSchema } from '../schema/genre';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.009433962264150943,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/types.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/icon.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 6,
+      "imports": [],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/icon.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/genre.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 13,
+      "imports": [],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/genre.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/slider.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 23,
+      "imports": [],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/slider.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/question.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 42,
+      "imports": [],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/question.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 42,
+      "imports": [],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/show.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 31,
+      "imports": [],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/show.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/molecules/CircularProgressWithLable.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 36,
+      "imports": [
+        "import CircularProgress, {\n  CircularProgressProps,\n} from '@mui/material/CircularProgress';",
+        "import Typography from '@mui/material/Typography';",
+        "import Box from '@mui/material/Box';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/molecules/CircularProgressWithLable.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/molecules/IconButton.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 27,
+      "imports": [
+        "import React from 'react';",
+        "import Button from '@mui/material/Button';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/molecules/IconButton.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/molecules/Scrollbar.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 5,
+      "imports": [
+        "import SimpleBar from 'simplebar-react';",
+        "import { styled } from '@mui/material/styles';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/molecules/Scrollbar.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/DatePicker.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 54,
+      "imports": [
+        "import React from 'react';",
+        "import { DatePicker } from '@mui/x-date-pickers/DatePicker';",
+        "import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';",
+        "import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.2037037037037037,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/DatePicker.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/Button.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 36,
+      "imports": [
+        "import React from 'react';",
+        "import Button from '@mui/material/Button';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/Button.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SideNav.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 144,
+      "imports": [
+        "import { FC } from 'react';",
+        "import { useLocation } from 'react-router';",
+        "import {\n  Box,\n  Divider,\n  Drawer,\n  Stack,\n  Typography,\n  useMediaQuery,\n} from '@mui/material';",
+        "import { items } from '../../lib/config/navitems';",
+        "import { SideNavItem } from './SideNavItem';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.08333333333333333,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SideNav.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/ButtonCustomized.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 65,
+      "imports": [
+        "import { brown } from '@mui/material/colors';",
+        "import { styled } from '@mui/material/styles';",
+        "import Button, { ButtonProps } from '@mui/material/Button';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.046153846153846156,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/ButtonCustomized.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SideNavItem.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 98,
+      "imports": [
+        "import { Link } from 'react-router';",
+        "import { Box, ButtonBase } from '@mui/material';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SideNavItem.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/ToastProvider.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 57,
+      "imports": [
+        "import React, { useState } from 'react';",
+        "import { Snackbar, SnackbarContent, Button } from '@mui/material';",
+        "import { ToastContext } from '../../contexts/toastContext';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/ToastProvider.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/TableSkeleton.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 48,
+      "imports": [
+        "import React from 'react';",
+        "import {\n  Table,\n  TableBody,\n  TableCell,\n  TableContainer,\n  TableHead,\n  TableRow,\n  Paper,\n} from '@mui/material';",
+        "import { Skeleton } from '@mui/material';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/TableSkeleton.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/DeleteConfirmationModal.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 91,
+      "imports": [
+        "import React from 'react';",
+        "import {\n  Button,\n  Dialog,\n  DialogActions,\n  DialogContent,\n  DialogContentText,\n  CircularProgress,\n  AppBar,\n  Toolbar,\n  Typography,\n  IconButton,\n} from '@mui/material';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import { DeleteConfirmationModalProps } from '../../types/ui/types';",
+        "import { useTranslation } from 'react-i18next';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/DeleteConfirmationModal.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SkeletonLoading.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 58,
+      "imports": [
+        "import { Box, Paper, Skeleton } from '@mui/material';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.06896551724137931,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SkeletonLoading.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/TopNav.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 107,
+      "imports": [
+        "import { FC } from 'react';",
+        "import { Link, useNavigate } from 'react-router';",
+        "import AccountCircleIcon from '@mui/icons-material/AccountCircle';",
+        "import LogoutIcon from '@mui/icons-material/Logout';",
+        "import MenuIcon from '@mui/icons-material/Menu';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import {\n  Box,\n  IconButton,\n  Stack,\n  SvgIcon,\n  Tooltip,\n  useMediaQuery,\n} from '@mui/material';",
+        "import { handleError } from '../../lib/utils';",
+        "import { alpha } from '@mui/material/styles';",
+        "import { signOutUser } from '../../services/auth/authService';",
+        "import { useTranslation } from 'react-i18next';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.009345794392523364,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/TopNav.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/BreadcrumbsNav.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 32,
+      "imports": [
+        "import { Breadcrumbs, Link, Typography } from '@mui/material';",
+        "import { useLocation, Link as RouterLink } from 'react-router';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/BreadcrumbsNav.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/Icons/AddIcon.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 1,
+      "imports": [],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/Icons/AddIcon.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddAudioForm.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 187,
+      "imports": [
+        "import {\n  Box,\n  Button,\n  Card,\n  CardContent,\n  CircularProgress,\n  Grid2,\n  TextField,\n} from '@mui/material';",
+        "import VolumeUpIcon from '@mui/icons-material/VolumeUp';",
+        "import Typography from '@mui/material/Typography';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import { useRef } from 'react';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.06951871657754011,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddAudioForm.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AnswersList.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 393,
+      "imports": [
+        "import { Fragment, useEffect, useState } from 'react';",
+        "import { AnswerSchema, QuestionSchema } from '../../types/schema/question';",
+        "import {\n  Box,\n  Button,\n  Card,\n  Chip,\n  CircularProgress,\n  FormControlLabel,\n  Grid2,\n  IconButton,\n  Switch,\n  TextField,\n  Typography,\n} from '@mui/material';",
+        "import { useTranslation } from 'react-i18next';",
+        "import DeleteIcon from '@mui/icons-material/Delete';",
+        "import { DragIndicator, Edit } from '@mui/icons-material';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import { useReorderAnswersMutation } from '../../redux/features/questionSlice';",
+        "import { arrayMove, List } from 'react-movable';",
+        "import { useToast } from '../../hooks/useToast';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.010178117048346057,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AnswersList.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddQuestionForm.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 652,
+      "imports": [
+        "import {\n  Box,\n  Button,\n  Card,\n  CardContent,\n  CircularProgress,\n  Divider,\n  FormControl,\n  FormControlLabel,\n  Grid2,\n  IconButton,\n  InputLabel,\n  MenuItem,\n  Select,\n  Switch,\n  TextField,\n  Tooltip,\n  Typography,\n} from '@mui/material';",
+        "import AddIcon from '@mui/icons-material/Add';",
+        "import { useEffect, useMemo, useState } from 'react';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { QuestionSchema } from '../../types/schema/question';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import useEpisodeOptions from '../../hooks/useEpisodeOptions';",
+        "import { EpisodeSchema } from '../../types/schema/episode';",
+        "import { InfoOutlined } from '@mui/icons-material';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.010736196319018405,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddQuestionForm.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddAnswerForm.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 167,
+      "imports": [
+        "import { QuestionSchema } from '../../types/schema/question';",
+        "import {\n  Button,\n  Grid2,\n  TextField,\n  FormControlLabel,\n  Switch,\n  CircularProgress,\n  Tooltip,\n} from '@mui/material';",
+        "import { Card } from '@mui/material';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import { useCreateAnswersMutation } from '../../redux/features/questionSlice';",
+        "import AddIcon from '@mui/icons-material/Add';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.005988023952095809,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddAnswerForm.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/EditEpisode.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 234,
+      "imports": [
+        "import React, { useEffect } from 'react';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import {\n  Dialog,\n  DialogActions,\n  DialogContent,\n  TextField,\n  Checkbox,\n  Button,\n  AppBar,\n  Toolbar,\n  IconButton,\n  Typography,\n  CircularProgress,\n} from '@mui/material';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import { EpisodeSchema } from '../../types/schema/episode';",
+        "import { useTranslation } from 'react-i18next';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.017094017094017096,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/EditEpisode.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/CreateEpisode.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 241,
+      "imports": [
+        "import React, { useState } from 'react';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import {\n  Dialog,\n  DialogActions,\n  DialogContent,\n  DialogTitle,\n  TextField,\n  Checkbox,\n  Button,\n  AppBar,\n  Toolbar,\n  IconButton,\n  Typography,\n  CircularProgress,\n} from '@mui/material';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import { EpisodeSchema } from '../../types/schema/episode';",
+        "import CustomDatePicker from '../../components/atoms/DatePicker';",
+        "import { useTranslation } from 'react-i18next';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.024896265560165973,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/CreateEpisode.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/EpisodeTable.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 257,
+      "imports": [
+        "import React from 'react';",
+        "import {\n  Table,\n  TableBody,\n  TableCell,\n  TableContainer,\n  TableHead,\n  TableRow,\n  Paper,\n  Checkbox,\n  TablePagination,\n  Box,\n  Popover,\n  Button,\n  Typography,\n} from '@mui/material';",
+        "import { format, parseISO } from 'date-fns';",
+        "import { pink } from '@mui/material/colors';",
+        "import {\n  Edit,\n  Delete,\n  Upload,\n  MoreVert,\n  AudioFile,\n  ClosedCaption,\n} from '@mui/icons-material';",
+        "import { EpisodeSchema } from '../../types/schema/episode';",
+        "import { useTranslation } from 'react-i18next';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.007782101167315175,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/EpisodeTable.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddCaptionForm.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 223,
+      "imports": [
+        "import {\n  Box,\n  Typography,\n  Card,\n  CardContent,\n  Grid2,\n  TextField,\n  Button,\n  CircularProgress,\n  Autocomplete,\n} from '@mui/material';",
+        "import { useTranslation } from 'react-i18next';",
+        "import SubtitlesIcon from '@mui/icons-material/Subtitles';",
+        "import AddIcon from '@mui/icons-material/Add';",
+        "import { search } from 'language-tags';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import { useEffect, useRef, useState } from 'react';",
+        "import { debounce } from '../../debounce';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.004484304932735426,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddCaptionForm.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/QuestionForm.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 639,
+      "imports": [
+        "import {\n  Box,\n  Button,\n  CircularProgress,\n  FormControl,\n  FormControlLabel,\n  Grid2,\n  MenuItem,\n  InputLabel,\n  Select,\n  Switch,\n  TextField,\n  Typography,\n  Tooltip,\n  IconButton,\n} from '@mui/material';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { useState, useEffect, useMemo } from 'react';",
+        "import { QuestionSchema } from '../../types/schema/question';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import { EpisodeSchema } from '../../types/schema/episode';",
+        "import useEpisodeOptions from '../../hooks/useEpisodeOptions';",
+        "import { InfoOutlined } from '@mui/icons-material';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.009389671361502348,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/QuestionForm.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 503,
+      "imports": [
+        "import React, { useState } from 'react';",
+        "import {\n  Dialog,\n  DialogContent,\n  Typography,\n  Box,\n  AppBar,\n  Toolbar,\n  IconButton,\n  Chip,\n  CircularProgress,\n  Divider,\n  Grid2,\n  Accordion,\n  AccordionSummary,\n  AccordionDetails,\n} from '@mui/material';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import EditIcon from '@mui/icons-material/Edit';",
+        "import DeleteIcon from '@mui/icons-material/Delete';",
+        "import { EpisodeSchema } from '../../types/schema/episode';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import {\n  useCreateQuestionMutation,\n  useUpdateQuestionMutation,\n  useDeleteQuestionMutation,\n  useUpdateAnswerMutation,\n  useDeleteAnswerMutation,\n  useGetAllShowQuestionsByShowIdQuery,\n} from '../../redux/features/questionSlice';",
+        "import { QuestionSchema, AnswerSchema } from '../../types/schema/question';",
+        "import DeleteConfirmationModal from '../../components/organisms/DeleteConfirmationModal';",
+        "import QuestionForm from '../Episode/QuestionForm';",
+        "import AnswersList from '../Episode/AnswersList';",
+        "import AddQuestionForm from '../Episode/AddQuestionForm';",
+        "import AddAnswerForm from '../Episode/AddAnswerForm';",
+        "import { useParams } from 'react-router';",
+        "import { ExpandMore } from '@mui/icons-material';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.007952286282306162,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageCaptions.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 305,
+      "imports": [
+        "import React, { useState } from 'react';",
+        "import {\n  Dialog,\n  DialogContent,\n  Typography,\n  Box,\n  AppBar,\n  Toolbar,\n  IconButton,\n  Chip,\n  CircularProgress,\n  Grid2,\n  Card,\n} from '@mui/material';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import DeleteIcon from '@mui/icons-material/Delete';",
+        "import SubtitlesIcon from '@mui/icons-material/Subtitles';",
+        "import CheckCircleIcon from '@mui/icons-material/CheckCircle';",
+        "import { EpisodeSchema } from '../../types/schema/episode';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import {\n  useGetEpisodeCaptionsByIdQuery,\n  useCreateEpisodeCaptionMutation,\n  useDeleteEpisodeCaptionMutation,\n} from '../../redux/features/episodesSlice';",
+        "import DeleteConfirmationModal from '../../components/organisms/DeleteConfirmationModal';",
+        "import AddCaptionForm from '../Episode/AddCaptionForm';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.019672131147540985,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageCaptions.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/EditShow.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 501,
+      "imports": [
+        "import React, { useEffect, useRef } from 'react';",
+        "import {\n  Dialog,\n  DialogContent,\n  DialogActions,\n  TextField,\n  Button,\n  CircularProgress,\n  AppBar,\n  Toolbar,\n  Typography,\n  IconButton,\n  Select,\n  MenuItem,\n  FormControl,\n  InputLabel,\n  FormHelperText,\n  Divider,\n  Grid2,\n  FormControlLabel,\n  Switch,\n} from '@mui/material';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import { ShowSchema } from '../../types/schema/show';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { useGetGenresQuery } from '../../redux/features/genreSlice';",
+        "import { GenreSchema } from '../../types/schema/genre';",
+        "import {\n  useGetAllShowQuestionsByShowIdQuery,\n  useToggleShowQuestionsMutation,\n} from '../../redux/features/questionSlice';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.00998003992015968,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/EditShow.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/UploadEpisode.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 130,
+      "imports": [
+        "import React from 'react';",
+        "import {\n  Dialog,\n  DialogContent,\n  DialogActions,\n  Button,\n  CircularProgress,\n  Typography,\n  Box,\n  AppBar,\n  Toolbar,\n  IconButton,\n} from '@mui/material';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import { EpisodeSchema } from '../../types/schema/episode';",
+        "import CustomButton from '../../components/atoms/Button';",
+        "import CircularProgressWithLabel from '../../components/molecules/CircularProgressWithLable';",
+        "import { useTranslation } from 'react-i18next';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.023076923076923078,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/UploadEpisode.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageAudio.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 333,
+      "imports": [
+        "import React, { useState } from 'react';",
+        "import {\n  Dialog,\n  DialogContent,\n  Typography,\n  Box,\n  AppBar,\n  Toolbar,\n  IconButton,\n  Card,\n  Chip,\n  CircularProgress,\n  Grid2,\n} from '@mui/material';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import DeleteIcon from '@mui/icons-material/Delete';",
+        "import CheckCircleIcon from '@mui/icons-material/CheckCircle';",
+        "import VolumeUpIcon from '@mui/icons-material/VolumeUp';",
+        "import { EpisodeSchema } from '../../types/schema/episode';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import {\n  useGetEpisodeAudioByIdQuery,\n  useCreateEpisodeAudioMutation,\n  useDeleteEpisodeAudioMutation,\n} from '../../redux/features/episodesSlice';",
+        "import DeleteConfirmationModal from '../../components/organisms/DeleteConfirmationModal';",
+        "import AddAudioForm from '../Episode/AddAudioForm';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.015015015015015015,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageAudio.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/CreateShow.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 420,
+      "imports": [
+        "import React, { useState } from 'react';",
+        "import {\n  Dialog,\n  DialogContent,\n  DialogActions,\n  TextField,\n  Button,\n  CircularProgress,\n  AppBar,\n  Toolbar,\n  Typography,\n  IconButton,\n  Select,\n  MenuItem,\n  InputLabel,\n  FormControl,\n  FormHelperText,\n} from '@mui/material';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import { ShowSchema } from '../../types/schema/show';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import { useTranslation } from 'react-i18next';",
+        "import CustomDatePicker from '../../components/atoms/DatePicker';",
+        "import { useGetGenresQuery } from '../../redux/features/genreSlice';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.007142857142857143,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/CreateShow.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ShowTable.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 176,
+      "imports": [
+        "import React from 'react';",
+        "import { Link } from 'react-router';",
+        "import { format, parseISO } from 'date-fns';",
+        "import {\n  Card,\n  Box,\n  Table,\n  TableBody,\n  TableCell,\n  TableContainer,\n  TableHead,\n  TableRow,\n  Avatar,\n  Typography,\n  Tooltip,\n  IconButton,\n  TablePagination,\n  Stack,\n} from '@mui/material';",
+        "import EditIcon from '@mui/icons-material/Edit';",
+        "import DeleteIcon from '@mui/icons-material/Delete';",
+        "import { ShowSchema } from '../../types/schema/show';",
+        "import { pink } from '@mui/material/colors';",
+        "import { useTranslation } from 'react-i18next';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.011363636363636364,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ShowTable.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/CreateSlider.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 222,
+      "imports": [
+        "import React from 'react';",
+        "import {\n  Dialog,\n  DialogContent,\n  DialogActions,\n  TextField,\n  Button,\n  CircularProgress,\n  AppBar,\n  Toolbar,\n  Typography,\n  IconButton,\n  Checkbox,\n  FormControl,\n  MenuItem,\n  InputLabel,\n  Select,\n} from '@mui/material';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import { useTranslation } from 'react-i18next';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.013513513513513514,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/CreateSlider.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderShowList.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 327,
+      "imports": [
+        "import {\n  Typography,\n  Box,\n  Card,\n  CardContent,\n  CardMedia,\n  Grid2,\n  TablePagination,\n  Tooltip,\n  IconButton,\n  Skeleton,\n  Button,\n} from '@mui/material';",
+        "import DeleteIcon from '@mui/icons-material/Delete';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { useGetSliderShowsQuery } from '../../redux/features/sliderSlice';",
+        "import { useState } from 'react';",
+        "import DeleteConfirmationModal from '../../components/organisms/DeleteConfirmationModal';",
+        "import {\n  useCreateSliderShowsMutation,\n  useDeleteSliderShowMutation,\n} from '../../redux/features/sliderSlice';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import CreateSliderShows from './CreateSliderShow';",
+        "import {\n  useCreateWebSliderShowsMutation,\n  useDeleteWebSliderShowMutation,\n  useGetWebSliderShowsQuery,\n} from '../../redux/features/webSliderSlice';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.009174311926605505,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderShowList.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderList.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 180,
+      "imports": [
+        "import { useEffect, useRef, useState } from 'react';",
+        "import { Box, Button, CircularProgress } from '@mui/material';",
+        "import SliderItem from './SliderItem';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import { useReorderSlidersMutation } from '../../redux/features/sliderSlice';",
+        "import { SliderListProps } from '../../types/ui/types';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { List, arrayMove } from 'react-movable';",
+        "import { SliderSchema } from '../../types/schema/slider';",
+        "import { useReorderWebSlidersMutation } from '../../redux/features/webSliderSlice';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.022222222222222223,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderList.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderItem.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 119,
+      "imports": [
+        "import {\n  Paper,\n  Typography,\n  ListItem,\n  Box,\n  Tooltip,\n  Stack,\n  IconButton,\n  Chip,\n} from '@mui/material';",
+        "import { Edit, Delete, DragIndicator } from '@mui/icons-material';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { SliderItemProps } from '../../types/ui/types';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.008403361344537815,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderItem.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderReorderModal.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 126,
+      "imports": [
+        "import {\n  Dialog,\n  DialogContent,\n  DialogActions,\n  Button,\n  List,\n  ListItem,\n  TextField,\n  Typography,\n  Box,\n  AppBar,\n  Toolbar,\n  IconButton,\n  CircularProgress,\n} from '@mui/material';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import { useFormik } from 'formik';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { SliderReorderModalProps } from '../../types/ui/types';",
+        "import * as Yup from 'yup';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.007936507936507936,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderReorderModal.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/CreateSliderShow.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 205,
+      "imports": [
+        "import {\n  Dialog,\n  DialogContent,\n  DialogActions,\n  Button,\n  Box,\n  TextField,\n  Autocomplete,\n  Typography,\n  IconButton,\n  List,\n  ListItem,\n  AppBar,\n  Toolbar,\n  CircularProgress,\n} from '@mui/material';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import { Delete } from '@mui/icons-material';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { useGetAllShowsQuery } from '../../redux/features/showSlice';",
+        "import { CreateSliderShowsProps } from '../../types/ui/types';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.00975609756097561,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/CreateSliderShow.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/EditSlider.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 177,
+      "imports": [
+        "import React, { useEffect } from 'react';",
+        "import {\n  Dialog,\n  DialogContent,\n  DialogActions,\n  TextField,\n  Button,\n  CircularProgress,\n  AppBar,\n  Toolbar,\n  Typography,\n  IconButton,\n  Checkbox,\n  InputLabel,\n  FormControl,\n  Select,\n  MenuItem,\n} from '@mui/material';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { STYLE_OPTIONS } from './CreateSlider';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.005649717514124294,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/EditSlider.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreList.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 58,
+      "imports": [
+        "import { Box, Skeleton, TablePagination, Stack } from '@mui/material';",
+        "import GenreItem from './GenreItem';",
+        "import { GenreListProps } from '../../types/ui/types';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.017241379310344827,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreList.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreForm.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 134,
+      "imports": [
+        "import React, { useEffect } from 'react';",
+        "import {\n  Dialog,\n  DialogContent,\n  DialogActions,\n  TextField,\n  Button,\n  CircularProgress,\n  AppBar,\n  Toolbar,\n  Typography,\n  IconButton,\n} from '@mui/material';",
+        "import CloseIcon from '@mui/icons-material/Close';",
+        "import { useFormik } from 'formik';",
+        "import * as Yup from 'yup';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { GenreFormModalProps } from '../../types/ui/types';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreForm.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreItem.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 88,
+      "imports": [
+        "import {\n  Paper,\n  Typography,\n  ListItem,\n  Box,\n  Tooltip,\n  Stack,\n  IconButton,\n} from '@mui/material';",
+        "import { Edit, Delete } from '@mui/icons-material';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { GenreItemProps } from '../../types/ui/types';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.0,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreItem.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/config/navitems.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 36,
+      "imports": [
+        "import React from 'react';",
+        "import MovieIcon from '@mui/icons-material/Movie';",
+        "import ShowChartIcon from '@mui/icons-material/ShowChart';",
+        "import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';",
+        "import CategoryIcon from '@mui/icons-material/Category';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.027777777777777776,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/config/navitems.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/auth/firebase.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 18,
+      "imports": [
+        "import { initializeApp, getApps } from 'firebase/app';",
+        "import { getAuth } from 'firebase/auth';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.05555555555555555,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/auth/firebase.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/auth/Login.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 140,
+      "imports": [
+        "import { useState } from 'react';",
+        "import { Formik, Form } from 'formik';",
+        "import { useNavigate } from 'react-router';",
+        "import * as Yup from 'yup';",
+        "import {\n  Box,\n  Button,\n  TextField,\n  Typography,\n  CircularProgress,\n  InputAdornment,\n  IconButton,\n} from '@mui/material';",
+        "import { Visibility, VisibilityOff } from '@mui/icons-material';",
+        "import { handleError } from '../../lib/utils';",
+        "import {\n  signInAndGetToken,\n  getBackendToken,\n} from '../../services/auth/authService';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import { useTranslation } from 'react-i18next';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.007142857142857143,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/auth/Login.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/genres/Genres.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 168,
+      "imports": [
+        "import { useState } from 'react';",
+        "import { Box, Typography } from '@mui/material';",
+        "import { useTranslation } from 'react-i18next';",
+        "import GenreList from '../../view/Genre/GenreList';",
+        "import GenreFormModal from '../../view/Genre/GenreForm';",
+        "import BreadcrumbsNav from '../../components/organisms/BreadcrumbsNav';",
+        "import DeleteConfirmationModal from '../../components/organisms/DeleteConfirmationModal';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import CustomButton from '../../components/atoms/Button';",
+        "import { GenreSchema } from '../../types/schema/genre';",
+        "import {\n  useGetGenresQuery,\n  useCreateGenreMutation,\n  useUpdateGenreMutation,\n  useDeleteGenreMutation,\n} from '../../redux/features/genreSlice';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.005952380952380952,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/genres/Genres.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 403,
+      "imports": [
+        "import React, { useState } from 'react';",
+        "import { useParams } from 'react-router';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import { Box, Typography } from '@mui/material';",
+        "import CustomButton from '../../components/atoms/Button';",
+        "import { EpisodeSchema } from '../../types/schema/episode';",
+        "import {\n  useGetEpisodesByShowIdQuery,\n  useCreateEpisodeMutation,\n  useUpdateEpisodeMutation,\n  useDeleteEpisodeMutation,\n} from '../../redux/features/episodesSlice';",
+        "import CreateEpisodeModal from '../../view/Episode/CreateEpisode';",
+        "import EpisodeTable from '../../view/Episode/EpisodeTable';",
+        "import DeleteConfirmationModal from '../../components/organisms/DeleteConfirmationModal';",
+        "import BreadcrumbsNav from '../../components/organisms/BreadcrumbsNav';",
+        "import TableSkeleton from '../../components/organisms/TableSkeleton';",
+        "import EditEpisodeModal from '../../view/Episode/EditEpisode';",
+        "import UploadEpisodeModal from '../../view/Show/UploadEpisode';",
+        "import { useTranslation } from 'react-i18next';",
+        "import { uploadVideo } from '../../services/episode/videoUploadService';",
+        "import { replaceVideo } from '../../services/episode/videoReplaceService';",
+        "import {\n  getVideoDuration,\n  isValidVideoFile,\n  formatFileSize,\n} from '../../lib/videoHelpers';",
+        "import ManageQuestionsModal from '../../view/Show/ManageQuestions';",
+        "import { QuestionAnswer } from '@mui/icons-material';",
+        "import ManageAudio from '../../view/Show/ManageAudio';",
+        "import ManageCaptions from '../../view/Show/ManageCaptions';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.03722084367245657,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 319,
+      "imports": [
+        "import { useState } from 'react';",
+        "import { DndProvider } from 'react-dnd';",
+        "import { HTML5Backend } from 'react-dnd-html5-backend';",
+        "import {\n  Box,\n  Typography,\n  TablePagination,\n  Grid2,\n  Card,\n  CardContent,\n  Divider,\n  Tabs,\n  Tab,\n} from '@mui/material';",
+        "import { useTranslation } from 'react-i18next';",
+        "import SliderList from '../../view/Slider/SliderList';",
+        "import SliderShowList from '../../view/Slider/SliderShowList';",
+        "import CustomButton from '../../components/atoms/Button';",
+        "import CreateSliderModal from '../../view/Slider/CreateSlider';",
+        "import EditSliderModal from '../../view/Slider/EditSlider';",
+        "import DeleteConfirmationModal from '../../components/organisms/DeleteConfirmationModal';",
+        "import SkeletonLoading from '../../components/organisms/SkeletonLoading';",
+        "import BreadcrumbsNav from '../../components/organisms/BreadcrumbsNav';",
+        "import { SliderSchema } from '../../types/schema/slider';",
+        "import {\n  useGetSlidersQuery,\n  useUpdateSliderMutation,\n  useCreateSliderMutation,\n  useDeleteSliderMutation,\n} from '../../redux/features/sliderSlice';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import {\n  useGetWebSlidersQuery,\n  useCreateWebSliderMutation,\n  useDeleteWebSliderMutation,\n  useUpdateWebSliderMutation,\n} from '../../redux/features/webSliderSlice';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.009404388714733543,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 185,
+      "imports": [
+        "import React, { useState } from 'react';",
+        "import BreadcrumbsNav from '../../components/organisms/BreadcrumbsNav';",
+        "import TableSkeleton from '../../components/organisms/TableSkeleton';",
+        "import { Typography, Box } from '@mui/material';",
+        "import CustomButton from '../../components/atoms/Button';",
+        "import {\n  useGetShowsQuery,\n  useCreateShowMutation,\n  useUpdateShowMutation,\n  useDeleteShowMutation,\n} from '../../redux/features/showSlice';",
+        "import ShowTable from '../../view/Show/ShowTable';",
+        "import { ShowSchema } from '../../types/schema/show';",
+        "import CreateShowModal from '../../view/Show/CreateShow';",
+        "import EditShowModal from '../../view/Show/EditShow';",
+        "import { useToast } from '../../hooks/useToast';",
+        "import DeleteConfirmationModal from '../../components/organisms/DeleteConfirmationModal';",
+        "import { useTranslation } from 'react-i18next';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.032432432432432434,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/baseApiSlice.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 58,
+      "imports": [
+        "import {\n  createApi,\n  fetchBaseQuery,\n  BaseQueryFn,\n} from '@reduxjs/toolkit/query/react';",
+        "import { signOutUser } from '../../services/auth/authService';",
+        "import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.06896551724137931,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/baseApiSlice.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/webSliderSlice.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 136,
+      "imports": [
+        "import { apiSlice } from './baseApiSlice';",
+        "import {\n  SliderSchema,\n  SliderResponse,\n  SliderShowPayload,\n} from '../../types/schema/slider';",
+        "import { ShowResponse } from '../../types/schema/show';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.09558823529411764,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/webSliderSlice.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/episodesSlice.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 150,
+      "imports": [
+        "import { apiSlice } from './baseApiSlice';",
+        "import {\n  EpisodeSchema,\n  EpisodeResponse,\n  EpisodeErrorResponse,\n  EpisodeAudioSchema,\n  EpisodeCaptionSchema,\n} from '../../types/schema/episode';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.06,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/episodesSlice.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/showSlice.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 79,
+      "imports": [
+        "import { apiSlice } from './baseApiSlice';",
+        "import { ShowSchema, ShowResponse } from '../../types/schema/show';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.12658227848101267,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/showSlice.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/genreSlice.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 67,
+      "imports": [
+        "import { apiSlice } from './baseApiSlice';",
+        "import { GenreSchema, GenreResponse } from '../../types/schema/genre';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.014925373134328358,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/genreSlice.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/questionSlice.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 183,
+      "imports": [
+        "import { apiSlice } from './baseApiSlice';",
+        "import {\n  QuestionSchema,\n  QuestionResponse,\n  AnswerSchema,\n  AnswerResponse,\n} from '../../types/schema/question';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.07103825136612021,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/questionSlice.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/sliderSlice.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 130,
+      "imports": [
+        "import { apiSlice } from './baseApiSlice';",
+        "import {\n  SliderSchema,\n  SliderResponse,\n  SliderShowPayload,\n} from '../../types/schema/slider';",
+        "import { ShowResponse } from '../../types/schema/show';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.1,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/sliderSlice.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/auth/authService.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 44,
+      "imports": [
+        "import { auth } from '../../lib/auth/firebase';",
+        "import axios from 'axios';",
+        "import { signInWithEmailAndPassword, signOut } from 'firebase/auth';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.06818181818181818,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/auth/authService.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/episode/videoReplaceService.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 235,
+      "imports": [
+        "import axios from 'axios';",
+        "import axiosClient from '../../lib/axiosClient';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.09787234042553192,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/episode/videoReplaceService.ts"
+    },
+    {
+      "type": "module",
+      "path": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/episode/videoUploadService.ts",
+      "language": "typescript",
+      "purpose_statement": null,
+      "domain_cluster": null,
+      "complexity_score": null,
+      "change_velocity_30d": 0,
+      "is_dead_code_candidate": false,
+      "last_modified": null,
+      "loc": 89,
+      "imports": [
+        "import axios from 'axios';"
+      ],
+      "public_functions": [],
+      "public_function_signatures": {},
+      "classes": [],
+      "cyclomatic_complexity": null,
+      "comment_ratio": 0.10112359550561797,
+      "dead_code_candidates": [],
+      "id": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/episode/videoUploadService.ts"
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/App.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/ToastProvider.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/App.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/store.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/App.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/App.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/themes/theme.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/main.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/App.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/layouts/DashoboardLayout.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SideNav.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/layouts/DashoboardLayout.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/TopNav.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/contexts/toastContext.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useAuth.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/auth/firebase.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useEpisodeOptions.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/question.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useEpisodeOptions.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useFirebase.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/auth/firebase.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/store.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/showSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/axiosClient.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/auth/authService.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/Dashboard.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/BreadcrumbsNav.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/ProtectdRoute.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useAuth.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/ProtectdRoute.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SkeletonLoading.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/auth/Login.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/layouts/AuthLayout.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/layouts/DashoboardLayout.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/Dashboard.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/NotFound.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/UnauthorizedPage.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/ProtectdRoute.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/routes/Routes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/genres/Genres.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/types.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/genre.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SideNav.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/config/navitems.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SideNav.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SideNavItem.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/ToastProvider.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/contexts/toastContext.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/DeleteConfirmationModal.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/types.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/TopNav.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/TopNav.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/utils.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/TopNav.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/auth/authService.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AnswersList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/question.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AnswersList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/questionSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AnswersList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddQuestionForm.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/question.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddQuestionForm.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useEpisodeOptions.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddQuestionForm.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddAnswerForm.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/question.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddAnswerForm.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddAnswerForm.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/questionSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/EditEpisode.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/CreateEpisode.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/CreateEpisode.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/DatePicker.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/EpisodeTable.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddCaptionForm.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/debounce.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/QuestionForm.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/question.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/QuestionForm.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/QuestionForm.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useEpisodeOptions.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/questionSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/question.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/DeleteConfirmationModal.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/QuestionForm.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AnswersList.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddQuestionForm.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddAnswerForm.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageCaptions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageCaptions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageCaptions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/episodesSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageCaptions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/DeleteConfirmationModal.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageCaptions.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddCaptionForm.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/EditShow.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/show.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/EditShow.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/genreSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/EditShow.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/genre.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/EditShow.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/questionSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/UploadEpisode.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/UploadEpisode.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/Button.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/UploadEpisode.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/molecules/CircularProgressWithLable.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageAudio.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageAudio.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageAudio.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/episodesSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageAudio.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/DeleteConfirmationModal.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageAudio.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/AddAudioForm.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/CreateShow.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/show.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/CreateShow.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/DatePicker.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/CreateShow.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/genreSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ShowTable.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/show.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 2,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderShowList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/sliderSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderShowList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/DeleteConfirmationModal.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderShowList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderShowList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/CreateSliderShow.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderShowList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/webSliderSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderItem.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/sliderSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/types.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/slider.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/webSliderSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderItem.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/types.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderReorderModal.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/types.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/CreateSliderShow.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/showSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/CreateSliderShow.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/types.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/EditSlider.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/CreateSlider.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreItem.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreList.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/types.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreForm.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/types.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreItem.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/ui/types.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/auth/Login.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/utils.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/auth/Login.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/auth/authService.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/auth/Login.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/genres/Genres.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreList.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/genres/Genres.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Genre/GenreForm.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/genres/Genres.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/BreadcrumbsNav.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/genres/Genres.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/DeleteConfirmationModal.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/genres/Genres.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/genres/Genres.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/Button.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/genres/Genres.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/genre.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/genres/Genres.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/genreSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/Button.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/episodesSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/CreateEpisode.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/EpisodeTable.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/DeleteConfirmationModal.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/BreadcrumbsNav.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/TableSkeleton.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Episode/EditEpisode.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/UploadEpisode.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/episode/videoUploadService.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/episode/videoReplaceService.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/videoHelpers.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageQuestions.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageAudio.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/episodes/Episodes.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ManageCaptions.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderList.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/SliderShowList.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/Button.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/CreateSlider.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Slider/EditSlider.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/DeleteConfirmationModal.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/SkeletonLoading.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/BreadcrumbsNav.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/slider.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/sliderSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/sliders/Sliders.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/webSliderSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/BreadcrumbsNav.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/TableSkeleton.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/atoms/Button.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/showSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/ShowTable.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/show.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/CreateShow.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/view/Show/EditShow.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/hooks/useToast.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/pages/shows/Shows.tsx",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/components/organisms/DeleteConfirmationModal.tsx"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/baseApiSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/auth/authService.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/webSliderSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/baseApiSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/webSliderSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/slider.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/webSliderSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/show.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/episodesSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/baseApiSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/episodesSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/episode.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/showSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/baseApiSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/showSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/show.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/genreSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/baseApiSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/genreSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/genre.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/questionSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/baseApiSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/questionSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/question.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/sliderSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/baseApiSlice.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/sliderSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/slider.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/redux/features/sliderSlice.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/types/schema/show.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/auth/authService.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/auth/firebase.ts"
+    },
+    {
+      "type": "IMPORTS",
+      "weight": 1,
+      "source": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/services/episode/videoReplaceService.ts",
+      "target": "/Users/melkam/Documents/SoftwareProjects/Whyzzer/Projects/gamma-cms/src/lib/axiosClient.ts"
+    }
+  ]
+}

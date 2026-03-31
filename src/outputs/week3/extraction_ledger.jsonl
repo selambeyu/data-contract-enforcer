@@ -1,0 +1,50 @@
+{"doc_id": "2019_Audited_Financial_Statement_Report", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 32, "processing_time": 67.6404, "cost_estimate": 0.05}
+{"doc_id": "2013-E.C-Assigned-regular-budget-and-expense", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 23, "processing_time": 11.5186, "cost_estimate": 0.05}
+{"doc_id": "2013-E.C-Audit-finding-information", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 32, "processing_time": 6.5065, "cost_estimate": 0.05}
+{"doc_id": "2018_Audited_Financial_Statement_Report", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 20, "processing_time": 15.3398, "cost_estimate": 0.05}
+{"doc_id": "20191010_Pharmaceutical-Manufacturing-Opportunites-in-Ethiopia_VF", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 197, "processing_time": 14.3666, "cost_estimate": 0.01}
+{"doc_id": "Annual_Report_JUNE-2017", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1058, "processing_time": 84.3065, "cost_estimate": 0.01}
+{"doc_id": "Annual_Report_JUNE-2023", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 2926, "processing_time": 112.8613, "cost_estimate": 0.01}
+{"doc_id": "Audit Report - 2023", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1802, "processing_time": 202.2062, "cost_estimate": 0.01}
+{"doc_id": "CBE Annual Report 2015-16", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 457, "processing_time": 118.8062, "cost_estimate": 0.05}
+{"doc_id": "CBE Annual Report 2017-18", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1818, "processing_time": 227.0076, "cost_estimate": 0.01}
+{"doc_id": "Consumer Price Index August 2025", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 142, "processing_time": 37.3599, "cost_estimate": 0.01}
+{"doc_id": "ETHIO_RE_AT_A_GLANCE_2023_24", "strategy_used": "vision_ocr", "confidence": 0.65, "block_count": 0, "processing_time": 0.0056, "cost_estimate": 0.05}
+{"doc_id": "ETHSWITCH-Annual-Report-202122", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1503, "processing_time": 90.4685, "cost_estimate": 0.01}
+{"doc_id": "Security_Vulnerability_Disclosure_Standard_Procedure_1", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 139, "processing_time": 17.6766, "cost_estimate": 0.05}
+{"doc_id": "tax_expenditure_ethiopia_2021_22", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 368, "processing_time": 73.63, "cost_estimate": 0.01}
+{"doc_id": "Security_Vulnerability_Disclosure_Standard_Procedure_2", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 139, "processing_time": 17.9672, "cost_estimate": 0.05}
+{"doc_id": "2013-E.C-Assigned-regular-budget-and-expense", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 3, "processing_time": 19.7589, "cost_estimate": 0.05}
+{"doc_id": "Consumer Price Index April 2025", "strategy_used": "layout", "confidence": 0.9, "block_count": 12, "processing_time": 17.6995, "cost_estimate": 0.01}
+{"doc_id": "Consumer Price Index April 2025", "strategy_used": "layout", "confidence": 0.9, "block_count": 12, "processing_time": 16.322, "cost_estimate": 0.01}
+{"doc_id": "Security_Vulnerability_Disclosure_Standard_Procedure_2", "strategy_used": "vision", "confidence": 0.65, "block_count": 167, "processing_time": 287.3695, "cost_estimate": 0.05, "cost_actual": 0.3}
+{"doc_id": "Security_Vulnerability_Disclosure_Standard_Procedure_1", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 15, "processing_time": 25.66, "cost_estimate": 0.05}
+{"doc_id": "Security_Vulnerability_Disclosure_Standard_Procedure_2", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 15, "processing_time": 30.0622, "cost_estimate": 0.05}
+{"doc_id": "tax_expenditure_ethiopia_2021_22", "strategy_used": "layout", "confidence": 0.9, "block_count": 60, "processing_time": 102.6087, "cost_estimate": 0.01}
+{"doc_id": "tax_expenditure_ethiopia_2021_22", "strategy_used": "layout", "confidence": 0.9, "block_count": 60, "processing_time": 97.5692, "cost_estimate": 0.01}
+{"doc_id": "tax_expenditure_ethiopia_2021_22", "strategy_used": "layout", "confidence": 0.9, "block_count": 60, "processing_time": 91.4096, "cost_estimate": 0.01}
+{"doc_id": "tax_expenditure_ethiopia_2021_22", "strategy_used": "layout", "confidence": 0.9, "block_count": 60, "processing_time": 102.8938, "cost_estimate": 0.01}
+{"doc_id": "EthSwitch-10th-Annual-Report-202324", "strategy_used": "layout", "confidence": 0.9, "block_count": 80, "processing_time": 126.5431, "cost_estimate": 0.01}
+{"doc_id": "Annual_Report_JUNE-2023", "strategy_used": "layout", "confidence": 0.9, "block_count": 104, "processing_time": 190.0571, "cost_estimate": 0.01}
+{"doc_id": "Company_Profile_2024_25", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 515, "processing_time": 29.8831, "cost_estimate": 0.01}
+{"doc_id": "tax_expenditure_ethiopia_2021_22", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 368, "processing_time": 83.3055, "cost_estimate": 0.01}
+{"doc_id": "tax_expenditure_ethiopia_2021_22", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 368, "processing_time": 81.8084, "cost_estimate": 0.01}
+{"doc_id": "tax_expenditure_ethiopia_2021_22", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 368, "processing_time": 77.2083, "cost_estimate": 0.01}
+{"doc_id": "tax_expenditure_ethiopia_2021_22", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 368, "processing_time": 74.2984, "cost_estimate": 0.01}
+{"doc_id": "tax_expenditure_ethiopia_2021_22", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 368, "processing_time": 77.2027, "cost_estimate": 0.01}
+{"doc_id": "Security_Vulnerability_Disclosure_Standard_Procedure_1", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 139, "processing_time": 25.9625, "cost_estimate": 0.05}
+{"doc_id": "Security_Vulnerability_Disclosure_Standard_Procedure_2", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 139, "processing_time": 28.0793, "cost_estimate": 0.05}
+{"doc_id": "2022_Audited_Financial_Statement_Report", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 17, "processing_time": 24.7467, "cost_estimate": 0.05}
+{"doc_id": "Audit Report - 2023", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1802, "processing_time": 232.6224, "cost_estimate": 0.01}
+{"doc_id": "tax_expenditure_ethiopia_2021_22", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 368, "processing_time": 88.0295, "cost_estimate": 0.01}
+{"doc_id": "Annual_Report_JUNE-2018", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1098, "processing_time": 88.6594, "cost_estimate": 0.01}
+{"doc_id": "CBE Annual Report 2016-17", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1867, "processing_time": 256.1532, "cost_estimate": 0.01}
+{"doc_id": "CBE Annual Report 2016-17", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1867, "processing_time": 277.1028, "cost_estimate": 0.01}
+{"doc_id": "CBE Annual Report 2016-17", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1867, "processing_time": 324.3319, "cost_estimate": 0.01}
+{"doc_id": "test-table", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1, "processing_time": 8.4041, "cost_estimate": 0.01}
+{"doc_id": "test-table", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1, "processing_time": 8.4317, "cost_estimate": 0.01}
+{"doc_id": "fta_performance_survey_final_report_2022", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 1242, "processing_time": 142.9193, "cost_estimate": 0.01}
+{"doc_id": "2022_Audited_Financial_Statement_Report", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 17, "processing_time": 28.9076, "cost_estimate": 0.05}
+{"doc_id": "CBE Annual Report 2006-7 ", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 607, "processing_time": 119.2575, "cost_estimate": 0.01}
+{"doc_id": "2013-E.C-Assigned-regular-budget-and-expense", "strategy_used": "layout_vision_fallback", "confidence": 0.9, "block_count": 23, "processing_time": 28.9152, "cost_estimate": 0.05}
+{"doc_id": "Company_Profile_2024_25", "strategy_used": "layout_docling", "confidence": 0.9, "block_count": 515, "processing_time": 31.4702, "cost_estimate": 0.01}
