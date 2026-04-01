@@ -1,0 +1,42 @@
+{
+  "processing_time_ms": {
+    "mean": 163230.82175980974,
+    "stddev": 89090.90238361174
+  },
+  "fact_confidence": {
+    "mean": 0.8983353151010705,
+    "stddev": 0.020332644560577567
+  },
+  "fact_page_ref": {
+    "mean": 737.8236016965949,
+    "stddev": 628.8918513673295
+  },
+  "sequence_number": {
+    "mean": 5.123793299261783,
+    "stddev": 3.448897473762196
+  },
+  "extracted_fact_confidence": {
+    "mean": 0.8983353151010705,
+    "stddev": 0.020332644560577567
+  },
+  "extracted_fact_page_ref": {
+    "mean": 737.8236016965949,
+    "stddev": 628.8918513673295
+  },
+  "total_tokens": {
+    "mean": 38.375,
+    "stddev": 23.562480263980618
+  },
+  "prompt_tokens": {
+    "mean": 31.546875,
+    "stddev": 20.12652808947703
+  },
+  "completion_tokens": {
+    "mean": 6.828125,
+    "stddev": 3.480351594626931
+  },
+  "total_cost": {
+    "mean": 0.0001970625,
+    "stddev": 0.00011216553455878121
+  }
+}
