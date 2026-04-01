@@ -1,0 +1,85 @@
+kind: DataContract
+apiVersion: v3.0.0
+id: week3-document-refinery-extractions
+info:
+  title: Week3 Document Refinery Extractions
+  version: 1.0.0
+  owner: week7-enforcer
+  description: 'Auto-generated contract for outputs/week3/extractions.jsonl. Source
+    snapshot: 3977ad436c588fd4. Generated at: 2026-04-01T08:09:43.328331+00:00.'
+servers:
+  local:
+    type: local
+    path: outputs/week3/extractions.jsonl
+    format: jsonl
+terms:
+  usage: Internal inter-system data contract. Do not publish.
+  limitations: All confidence fields must remain in 0.0–1.0 float range. All _id fields
+    must be valid UUID v4.
+schema:
+  doc_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  source_path:
+    type: string
+    required: true
+  source_hash:
+    type: string
+    required: true
+  extraction_model:
+    type: string
+    required: true
+    enum:
+    - docling-layout-v1
+    - layout-v1
+    - layout-vision-fallback-v1
+    - vision-ocr-v1
+    - vision-v1
+  processing_time_ms:
+    type: integer
+    required: true
+    minimum: 0
+  extracted_at:
+    type: string
+    required: true
+    format: date-time
+    description: ISO 8601 datetime string.
+  fact_fact_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  fact_text:
+    type: string
+    required: true
+  fact_confidence:
+    type: number
+    required: true
+    minimum: 0.0
+    maximum: 1.0
+    description: Confidence score. Must remain 0.0–1.0 float. BREAKING CHANGE if changed
+      to 0–100 integer percentage.
+  fact_page_ref:
+    type: number
+    required: false
+    minimum: 0
+quality:
+  type: SodaChecks
+  specification:
+    checks for extractions:
+    - missing_count(doc_id) = 0
+    - duplicate_count(doc_id) = 0
+    - missing_count(source_path) = 0
+    - missing_count(source_hash) = 0
+    - missing_count(extraction_model) = 0
+    - missing_count(processing_time_ms) = 0
+    - missing_count(extracted_at) = 0
+    - missing_count(fact_fact_id) = 0
+    - duplicate_count(fact_fact_id) = 0
+    - missing_count(fact_text) = 0
+    - missing_count(fact_confidence) = 0
+lineage:
+  upstream: []
+  downstream: []

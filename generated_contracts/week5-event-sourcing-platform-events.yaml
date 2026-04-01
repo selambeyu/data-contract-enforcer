@@ -1,0 +1,143 @@
+kind: DataContract
+apiVersion: v3.0.0
+id: week5-event-sourcing-platform-events
+info:
+  title: Week5 Event Sourcing Platform Events
+  version: 1.0.0
+  owner: week7-enforcer
+  description: 'Auto-generated contract for outputs/week5/events.jsonl. Source snapshot:
+    fa626114e1881c8c. Generated at: 2026-04-01T08:09:43.935148+00:00.'
+servers:
+  local:
+    type: local
+    path: outputs/week5/events.jsonl
+    format: jsonl
+terms:
+  usage: Internal inter-system data contract. Do not publish.
+  limitations: All confidence fields must remain in 0.0–1.0 float range. All _id fields
+    must be valid UUID v4.
+schema:
+  event_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  event_type:
+    type: string
+    required: true
+  aggregate_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  aggregate_type:
+    type: string
+    required: true
+    enum:
+    - AgentSession
+    - ComplianceRecord
+    - DocumentPackage
+    - LoanApplication
+  sequence_number:
+    type: integer
+    required: true
+    minimum: 0
+  schema_version:
+    type: string
+    required: true
+    enum:
+    - 1.0.0
+    - 2.0.0
+  occurred_at:
+    type: string
+    required: true
+    format: date-time
+    description: ISO 8601 datetime string.
+  recorded_at:
+    type: string
+    required: true
+    format: date-time
+    description: ISO 8601 datetime string.
+  payload:
+    type: string
+    required: false
+  metadata:
+    type: string
+    required: false
+quality:
+  type: SodaChecks
+  specification:
+    checks for events:
+    - missing_count(event_id) = 0
+    - duplicate_count(event_id) = 0
+    - missing_count(event_type) = 0
+    - missing_count(aggregate_id) = 0
+    - duplicate_count(aggregate_id) = 0
+    - missing_count(aggregate_type) = 0
+    - missing_count(sequence_number) = 0
+    - missing_count(schema_version) = 0
+    - missing_count(occurred_at) = 0
+    - missing_count(recorded_at) = 0
+lineage:
+  upstream: []
+  downstream:
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/reporting/organization_administration_report.sql:1
+    label: organization_administration_report.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/reporting/instructor_module_report.sql:1
+    label: instructor_module_report.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/reporting/organization_administration_report.sql:1
+    label: organization_administration_report.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/dimensional/afact_course_page_engagement.sql:1
+    label: afact_course_page_engagement.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/reporting/organization_administration_report.sql:1
+    label: organization_administration_report.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/dimensional/afact_discussion_engagement.sql:1
+    label: afact_discussion_engagement.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/reporting/organization_administration_report.sql:1
+    label: organization_administration_report.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/reporting/cheating_detection_report.sql:1
+    label: cheating_detection_report.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/reporting/problem_engagement_detail_report.sql:1
+    label: problem_engagement_detail_report.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/dimensional/afact_problem_engagement.sql:1
+    label: afact_problem_engagement.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model

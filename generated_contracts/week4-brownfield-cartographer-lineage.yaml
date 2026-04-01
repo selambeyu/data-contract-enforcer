@@ -1,0 +1,69 @@
+kind: DataContract
+apiVersion: v3.0.0
+id: week4-brownfield-cartographer-lineage
+info:
+  title: Week4 Brownfield Cartographer Lineage
+  version: 1.0.0
+  owner: week7-enforcer
+  description: 'Auto-generated contract for outputs/week4/lineage_snapshots.jsonl.
+    Source snapshot: aac3ecffe198aa94. Generated at: 2026-04-01T08:09:43.605566+00:00.'
+servers:
+  local:
+    type: local
+    path: outputs/week4/lineage_snapshots.jsonl
+    format: jsonl
+terms:
+  usage: Internal inter-system data contract. Do not publish.
+  limitations: All confidence fields must remain in 0.0–1.0 float range. All _id fields
+    must be valid UUID v4.
+schema:
+  snapshot_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  codebase_root:
+    type: string
+    required: true
+    enum:
+    - /Users/melkam/Documents/10 Academy/Week4/ol-data-platform
+  git_commit:
+    type: string
+    required: true
+    enum:
+    - 9d2b8c259f065d911fd426bc60c77dcfa454fcbb
+  captured_at:
+    type: string
+    required: true
+    format: date-time
+    description: ISO 8601 datetime string.
+  node_node_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  node_type:
+    type: string
+    required: true
+    enum:
+    - MODEL
+    - TABLE
+  node_label:
+    type: string
+    required: true
+quality:
+  type: SodaChecks
+  specification:
+    checks for lineage_snapshots:
+    - missing_count(snapshot_id) = 0
+    - duplicate_count(snapshot_id) = 0
+    - missing_count(codebase_root) = 0
+    - missing_count(git_commit) = 0
+    - missing_count(captured_at) = 0
+    - missing_count(node_node_id) = 0
+    - duplicate_count(node_node_id) = 0
+    - missing_count(node_type) = 0
+    - missing_count(node_label) = 0
+lineage:
+  upstream: []
+  downstream: []

@@ -1,0 +1,147 @@
+kind: DataContract
+apiVersion: v3.0.0
+id: langsmith-trace-runs
+info:
+  title: Langsmith Trace Runs
+  version: 1.0.0
+  owner: week7-enforcer
+  description: 'Auto-generated contract for outputs/traces/runs.jsonl. Source snapshot:
+    df705dc003f1620e. Generated at: 2026-04-01T17:47:03.308077+00:00.'
+servers:
+  local:
+    type: local
+    path: outputs/traces/runs.jsonl
+    format: jsonl
+terms:
+  usage: Internal inter-system data contract. Do not publish.
+  limitations: All confidence fields must remain in 0.0–1.0 float range. All _id fields
+    must be valid UUID v4.
+schema:
+  id:
+    type: string
+    required: true
+  name:
+    type: string
+    required: true
+  run_type:
+    type: string
+    required: true
+    enum:
+    - chain
+    - llm
+    - tool
+  error:
+    type: string
+    required: false
+    enum:
+    - evidence_not_found
+  start_time:
+    type: string
+    required: true
+  end_time:
+    type: string
+    required: true
+  total_tokens:
+    type: integer
+    required: true
+    minimum: 0
+  prompt_tokens:
+    type: integer
+    required: true
+    minimum: 0
+  completion_tokens:
+    type: integer
+    required: true
+    minimum: 0
+  total_cost:
+    type: number
+    required: true
+    minimum: 0
+  parent_run_id:
+    type: string
+    required: false
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  session_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+quality:
+  type: SodaChecks
+  specification:
+    checks for runs:
+    - missing_count(id) = 0
+    - missing_count(name) = 0
+    - missing_count(run_type) = 0
+    - missing_count(start_time) = 0
+    - missing_count(end_time) = 0
+    - missing_count(total_tokens) = 0
+    - missing_count(prompt_tokens) = 0
+    - missing_count(completion_tokens) = 0
+    - missing_count(total_cost) = 0
+    - missing_count(session_id) = 0
+    - duplicate_count(session_id) = 0
+lineage:
+  upstream: []
+  downstream:
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/reporting/organization_administration_report.sql:1
+    label: organization_administration_report.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/reporting/mitxonline_course_engagements_daily_report.sql:1
+    label: mitxonline_course_engagements_daily_report.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/migration/edxorg_to_mitxonline_enrollments.sql:1
+    label: edxorg_to_mitxonline_enrollments.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/migration/edxorg_to_mitxonline_course_runs.sql:1
+    label: edxorg_to_mitxonline_course_runs.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/marts/mitxonline/marts__mitxonline_discussions.sql:1
+    label: marts__mitxonline_discussions.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/marts/mitxonline/marts__mitxonline_course_engagements_daily.sql:1
+    label: marts__mitxonline_course_engagements_daily.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/marts/mitxonline/marts__mitxonline_video_engagements.sql:1
+    label: marts__mitxonline_video_engagements.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/marts/mitxonline/marts__mitxonline_problem_summary.sql:1
+    label: marts__mitxonline_problem_summary.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/marts/mitxonline/marts__mitxonline_problem_submissions.sql:1
+    label: marts__mitxonline_problem_submissions.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+  - id: transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/src/ol_dbt/models/marts/combined/marts__combined__products.sql:1
+    label: marts__combined__products.sql
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
