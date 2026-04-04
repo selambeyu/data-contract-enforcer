@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   owner: week7-enforcer
   description: 'Auto-generated contract for outputs/week3/extractions.jsonl. Source
-    snapshot: 3977ad436c588fd4. Generated at: 2026-04-01T08:09:43.328331+00:00.'
+    snapshot: 3977ad436c588fd4. Generated at: 2026-04-04T11:57:47.067751+00:00.'
 servers:
   local:
     type: local
@@ -25,6 +25,14 @@ schema:
   source_path:
     type: string
     required: true
+    llm_annotations:
+      description: The source path is the file name of the input document.
+      business_rule: The source path must be a non-empty string and match the file
+        extension of the input document.
+      cross_column_note: This field depends on the adjacent doc_id column for data
+        integrity.
+      annotated_by: llm
+    description: The source path is the file name of the input document.
   source_hash:
     type: string
     required: true
@@ -37,10 +45,22 @@ schema:
     - layout-vision-fallback-v1
     - vision-ocr-v1
     - vision-v1
+    llm_annotations:
+      description: A unique identifier for the extraction model used in document refinement.
+      business_rule: The value must be a valid UUID.
+      cross_column_note: No dependency on adjacent columns.
+      annotated_by: llm
+    description: A unique identifier for the extraction model used in document refinement.
   processing_time_ms:
     type: integer
     required: true
     minimum: 0
+    llm_annotations:
+      description: The processing time in milliseconds for document extraction.
+      business_rule: Values must be non-negative integers.
+      cross_column_note: Dependent on source_path and extraction_model.
+      annotated_by: llm
+    description: The processing time in milliseconds for document extraction.
   extracted_at:
     type: string
     required: true
@@ -54,6 +74,12 @@ schema:
   fact_text:
     type: string
     required: true
+    llm_annotations:
+      description: Text extracted from financial statements
+      business_rule: Values must be in the format of synthetic block X of Y from Z_Audited_Financial_Statement_Report
+      cross_column_note: No dependency on adjacent columns
+      annotated_by: llm
+    description: Text extracted from financial statements
   fact_confidence:
     type: number
     required: true
@@ -65,6 +91,12 @@ schema:
     type: number
     required: false
     minimum: 0
+    llm_annotations:
+      description: A unique identifier for each fact page.
+      business_rule: The value must be a valid integer greater than 0.
+      cross_column_note: Dependent on fact_fact_id and fact_text.
+      annotated_by: llm
+    description: A unique identifier for each fact page.
 quality:
   type: SodaChecks
   specification:
@@ -82,4 +114,51 @@ quality:
     - missing_count(fact_confidence) = 0
 lineage:
   upstream: []
-  downstream: []
+  downstream:
+  - id: week4-brownfield-cartographer
+    label: week4-brownfield-cartographer
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+    - source_hash
+    breaking_fields:
+    - field: extracted_facts.confidence
+      reason: Node ranking logic depends on 0.0–1.0 scale; changing to 0–100 silently
+        inverts all threshold comparisons
+    - field: doc_id
+      reason: Used as node_id reference in lineage graph; must remain UUID v4 for
+        graph joins
+    - field: extracted_facts
+      reason: Array structure is the schema contract; removing or renaming the array
+        breaks ingestion entirely
+    tier: 1
+  - id: week5-event-sourcing-platform
+    label: week5-event-sourcing-platform
+    fields_consumed:
+    - doc_id
+    - extracted_facts
+    - extraction_model
+    - processing_time_ms
+    breaking_fields:
+    - field: extracted_facts.confidence
+      reason: Event threshold filter (confidence >= 0.5) breaks silently if scale
+        changes to 0–100; all events pass filter incorrectly
+    - field: doc_id
+      reason: Used as aggregate_id in event sourcing; must be UUID v4 to satisfy event
+        schema contract
+    tier: 1
+  - id: week7-ai-extensions
+    label: week7-ai-extensions
+    fields_consumed:
+    - extracted_facts
+    - doc_id
+    - extraction_model
+    breaking_fields:
+    - field: extracted_facts.confidence
+      reason: Embedding drift baseline is computed only from facts with confidence
+        >= 0.8; scale change corrupts the baseline corpus
+    - field: extracted_facts
+      reason: Array structure required for vectorisation; removing or renaming breaks
+        embedding pipeline
+    tier: 1

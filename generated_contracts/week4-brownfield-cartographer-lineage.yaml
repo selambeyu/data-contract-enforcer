@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   owner: week7-enforcer
   description: 'Auto-generated contract for outputs/week4/lineage_snapshots.jsonl.
-    Source snapshot: aac3ecffe198aa94. Generated at: 2026-04-01T08:09:43.605566+00:00.'
+    Source snapshot: 6cb248bfa134e323. Generated at: 2026-04-04T11:58:12.037905+00:00.'
 servers:
   local:
     type: local
@@ -27,11 +27,29 @@ schema:
     required: true
     enum:
     - /Users/melkam/Documents/10 Academy/Week4/ol-data-platform
+    llm_annotations:
+      description: The codebase root represents the top-level directory of the data
+        platform.
+      business_rule: The value must be an absolute path to a valid directory on the
+        system.
+      cross_column_note: This field depends on the snapshot_id and git_commit columns
+        for its validity.
+      annotated_by: llm
+    description: The codebase root represents the top-level directory of the data
+      platform.
   git_commit:
     type: string
     required: true
     enum:
     - 9d2b8c259f065d911fd426bc60c77dcfa454fcbb
+    llm_annotations:
+      description: The git_commit field contains the SHA-1 hash of the commit that
+        created or updated the data.
+      business_rule: The value must be a valid SHA-1 hash.
+      cross_column_note: No dependency on adjacent columns.
+      annotated_by: llm
+    description: The git_commit field contains the SHA-1 hash of the commit that created
+      or updated the data.
   captured_at:
     type: string
     required: true
@@ -46,11 +64,27 @@ schema:
     type: string
     required: true
     enum:
+    - EXTERNAL
+    - FILE
     - MODEL
+    - PIPELINE
     - TABLE
+    llm_annotations:
+      description: The node type indicates the source of data for a cartographer lineage
+      business_rule: Node types must be one of PIPELINE, FILE, EXTERNAL, TABLE, or
+        MODEL
+      cross_column_note: Node type depends on git_commit and captured_at
+      annotated_by: llm
+    description: The node type indicates the source of data for a cartographer lineage
   node_label:
     type: string
     required: true
+    llm_annotations:
+      description: A unique identifier for each node in the graph.
+      business_rule: The value must be a valid UUID.
+      cross_column_note: Dependent on captured_at and node_node_id.
+      annotated_by: llm
+    description: A unique identifier for each node in the graph.
 quality:
   type: SodaChecks
   specification:
@@ -66,4 +100,26 @@ quality:
     - missing_count(node_label) = 0
 lineage:
   upstream: []
-  downstream: []
+  downstream:
+  - id: week7-enforcer
+    label: week7-enforcer
+    fields_consumed:
+    - snapshot_id
+    - nodes
+    - edges
+    - git_commit
+    - codebase_root
+    breaking_fields:
+    - field: edges.relationship
+      reason: ViolationAttributor traverses edges by relationship type (PRODUCES/CONSUMES);
+        rename breaks BFS traversal entirely
+    - field: nodes.node_id
+      reason: Used as reference key in edge source/target; structure change breaks
+        all graph lookups
+    - field: edges.source
+      reason: BFS traversal key; any rename or type change breaks upstream producer
+        discovery
+    - field: edges.target
+      reason: BFS traversal key; any rename or type change breaks downstream contamination
+        mapping
+    tier: 1

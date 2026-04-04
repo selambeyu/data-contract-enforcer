@@ -1,0 +1,48 @@
+version: 2
+models:
+- name: week4-brownfield-cartographer-lineage
+  description: Auto-generated dbt schema from Bitol contract week4-brownfield-cartographer-lineage
+  columns:
+  - name: snapshot_id
+    tests:
+    - not_null
+    - unique
+  - name: codebase_root
+    description: The codebase root represents the top-level directory of the data
+      platform.
+    tests:
+    - not_null
+    - accepted_values:
+        values:
+        - /Users/melkam/Documents/10 Academy/Week4/ol-data-platform
+  - name: git_commit
+    description: The git_commit field contains the SHA-1 hash of the commit that created
+      or updated the data.
+    tests:
+    - not_null
+    - accepted_values:
+        values:
+        - 9d2b8c259f065d911fd426bc60c77dcfa454fcbb
+  - name: captured_at
+    description: ISO 8601 datetime string.
+    tests:
+    - not_null
+  - name: node_node_id
+    tests:
+    - not_null
+    - unique
+  - name: node_type
+    description: The node type indicates the source of data for a cartographer lineage
+    tests:
+    - not_null
+    - accepted_values:
+        values:
+        - EXTERNAL
+        - FILE
+        - MODEL
+        - PIPELINE
+        - TABLE
+  - name: node_label
+    description: A unique identifier for each node in the graph.
+    tests:
+    - not_null

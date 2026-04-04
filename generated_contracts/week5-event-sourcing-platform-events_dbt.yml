@@ -1,0 +1,53 @@
+version: 2
+models:
+- name: week5-event-sourcing-platform-events
+  description: Auto-generated dbt schema from Bitol contract week5-event-sourcing-platform-events
+  columns:
+  - name: event_id
+    tests:
+    - not_null
+    - unique
+  - name: event_type
+    description: The event type indicates the action that occurred in an application
+      session.
+    tests:
+    - not_null
+  - name: aggregate_id
+    tests:
+    - not_null
+    - unique
+  - name: aggregate_type
+    description: The aggregate type indicates the event's purpose or category.
+    tests:
+    - not_null
+    - accepted_values:
+        values:
+        - AgentSession
+        - ComplianceRecord
+        - DocumentPackage
+        - LoanApplication
+  - name: sequence_number
+    description: A unique identifier for each event in the platform
+    tests:
+    - not_null
+  - name: schema_version
+    description: The schema version indicates the current version of the event data
+    tests:
+    - not_null
+    - accepted_values:
+        values:
+        - 1.0.0
+        - 2.0.0
+  - name: occurred_at
+    description: ISO 8601 datetime string.
+    tests:
+    - not_null
+  - name: recorded_at
+    description: ISO 8601 datetime string.
+    tests:
+    - not_null
+  - name: payload
+    description: Contains the payload of an event in the week5-event-sourcing-platform-events
+      contract.
+  - name: metadata
+    description: Unique identifier for the event

@@ -1,0 +1,59 @@
+version: 2
+models:
+- name: langsmith-trace-runs
+  description: Auto-generated dbt schema from Bitol contract langsmith-trace-runs
+  columns:
+  - name: id
+    description: Unique identifier for each trace run
+    tests:
+    - not_null
+  - name: name
+    description: A unique identifier for each trace run.
+    tests:
+    - not_null
+  - name: run_type
+    description: The run type indicates the tool or chain used to generate the trace.
+    tests:
+    - not_null
+    - accepted_values:
+        values:
+        - chain
+        - llm
+        - tool
+  - name: error
+    description: A unique identifier for each trace run.
+    tests:
+    - accepted_values:
+        values:
+        - evidence_not_found
+  - name: start_time
+    description: The start time of a trace run in ISO 8601 format
+    tests:
+    - not_null
+  - name: end_time
+    description: The end time of a trace run in ISO 8601 format
+    tests:
+    - not_null
+  - name: total_tokens
+    description: The total number of tokens in the trace run.
+    tests:
+    - not_null
+  - name: prompt_tokens
+    description: The number of tokens in each trace run.
+    tests:
+    - not_null
+  - name: completion_tokens
+    description: The number of completion tokens in each trace run.
+    tests:
+    - not_null
+  - name: total_cost
+    description: The total cost of the trace run in units of tokens
+    tests:
+    - not_null
+  - name: parent_run_id
+    tests:
+    - unique
+  - name: session_id
+    tests:
+    - not_null
+    - unique
