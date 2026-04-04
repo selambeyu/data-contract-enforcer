@@ -1,0 +1,168 @@
+# Contract Registry — subscriptions.yaml
+# Every consumer of a contract registers here.
+# This is the PRIMARY source of blast radius for the ViolationAttributor.
+# Producers publish contracts. Consumers subscribe to them here.
+#
+# Tier 1 = same repo (git access + lineage graph available)
+# Tier 3 = external systems (no git access, attribution by contract version only)
+#
+# validation_mode:
+#   AUDIT   — run checks, log results, never block pipeline
+#   WARN    — block on CRITICAL only; pass with annotation on HIGH/MEDIUM
+#   ENFORCE — block on any CRITICAL or HIGH violation
+
+registry_version: "1.0.0"
+last_updated: "2026-04-03T00:00:00+00:00"
+
+subscriptions:
+
+  # ── Week 3 Document Refinery → Week 4 Brownfield Cartographer ─────────────
+  - subscription_id: "sub-001"
+    contract_id: "week3-document-refinery-extractions"
+    contract_version: "1.0.0"
+    subscriber_id: "week4-brownfield-cartographer"
+    subscriber_team: "week4"
+    subscriber_description: "Ingests extracted facts as node metadata in the lineage graph"
+    fields_consumed:
+      - doc_id
+      - extracted_facts
+      - extraction_model
+      - source_hash
+    breaking_fields:
+      - field: extracted_facts.confidence
+        reason: "Node ranking logic depends on 0.0–1.0 scale; changing to 0–100 silently inverts all threshold comparisons"
+      - field: doc_id
+        reason: "Used as node_id reference in lineage graph; must remain UUID v4 for graph joins"
+      - field: extracted_facts
+        reason: "Array structure is the schema contract; removing or renaming the array breaks ingestion entirely"
+    validation_mode: ENFORCE
+    tier: 1
+    contact: "week4-team"
+    registered_at: "2026-04-01T00:00:00+00:00"
+
+  # ── Week 3 Document Refinery → Week 5 Event Sourcing Platform ────────────
+  - subscription_id: "sub-002"
+    contract_id: "week3-document-refinery-extractions"
+    contract_version: "1.0.0"
+    subscriber_id: "week5-event-sourcing-platform"
+    subscriber_team: "week5"
+    subscriber_description: "Captures document processing events referencing doc_id and extracted facts"
+    fields_consumed:
+      - doc_id
+      - extracted_facts
+      - extraction_model
+      - processing_time_ms
+    breaking_fields:
+      - field: extracted_facts.confidence
+        reason: "Event threshold filter (confidence >= 0.5) breaks silently if scale changes to 0–100; all events pass filter incorrectly"
+      - field: doc_id
+        reason: "Used as aggregate_id in event sourcing; must be UUID v4 to satisfy event schema contract"
+    validation_mode: ENFORCE
+    tier: 1
+    contact: "week5-team"
+    registered_at: "2026-04-01T00:00:00+00:00"
+
+  # ── Week 4 Brownfield Cartographer → Week 7 Enforcer ─────────────────────
+  - subscription_id: "sub-003"
+    contract_id: "week4-brownfield-cartographer-lineage"
+    contract_version: "1.0.0"
+    subscriber_id: "week7-enforcer"
+    subscriber_team: "week7"
+    subscriber_description: "Uses lineage graph for blast radius enrichment and upstream traversal in ViolationAttributor"
+    fields_consumed:
+      - snapshot_id
+      - nodes
+      - edges
+      - git_commit
+      - codebase_root
+    breaking_fields:
+      - field: edges.relationship
+        reason: "ViolationAttributor traverses edges by relationship type (PRODUCES/CONSUMES); rename breaks BFS traversal entirely"
+      - field: nodes.node_id
+        reason: "Used as reference key in edge source/target; structure change breaks all graph lookups"
+      - field: edges.source
+        reason: "BFS traversal key; any rename or type change breaks upstream producer discovery"
+      - field: edges.target
+        reason: "BFS traversal key; any rename or type change breaks downstream contamination mapping"
+    validation_mode: ENFORCE
+    tier: 1
+    contact: "week7-team"
+    registered_at: "2026-04-01T00:00:00+00:00"
+
+  # ── LangSmith Traces → Week 7 AI Extensions ──────────────────────────────
+  - subscription_id: "sub-004"
+    contract_id: "langsmith-trace-runs"
+    contract_version: "1.0.0"
+    subscriber_id: "week7-ai-extensions"
+    subscriber_team: "week7"
+    subscriber_description: "Runs embedding drift, prompt schema validation, and LLM output violation rate checks"
+    fields_consumed:
+      - id
+      - run_type
+      - inputs
+      - outputs
+      - total_tokens
+      - total_cost
+      - error
+      - start_time
+      - end_time
+    breaking_fields:
+      - field: run_type
+        reason: "Enum used to filter chain/tool/llm runs; adding undocumented values without contract update silently skews metrics"
+      - field: total_cost
+        reason: "Cost anomaly detection baseline depends on this field; type change or scale change breaks alerting"
+      - field: inputs
+        reason: "Prompt schema validation reads this structure; structural change breaks all input conformance checks"
+      - field: outputs
+        reason: "LLM output violation rate is computed from this structure; schema change breaks output conformance tracking"
+    validation_mode: AUDIT   # Tier 3 — external system, no git access; start in AUDIT to calibrate
+    tier: 3
+    contact: "week7-team"
+    registered_at: "2026-04-01T00:00:00+00:00"
+
+  # ── Week 5 Events → Week 7 Enforcer ──────────────────────────────────────
+  - subscription_id: "sub-005"
+    contract_id: "week5-event-sourcing-platform-events"
+    contract_version: "1.0.0"
+    subscriber_id: "week7-enforcer"
+    subscriber_team: "week7"
+    subscriber_description: "Validates event schema integrity and monitors sequence_number monotonicity"
+    fields_consumed:
+      - event_id
+      - event_type
+      - aggregate_id
+      - sequence_number
+      - occurred_at
+      - recorded_at
+    breaking_fields:
+      - field: event_type
+        reason: "Enum registered in schema registry; removing registered types breaks all downstream consumers filtering by event_type"
+      - field: sequence_number
+        reason: "Monotonicity assumption — gaps or resets break event replay and ordering guarantees"
+      - field: aggregate_id
+        reason: "Must be UUID v4; used as join key across aggregates — slug strings break all foreign key references"
+    validation_mode: ENFORCE
+    tier: 1
+    contact: "week7-team"
+    registered_at: "2026-04-01T00:00:00+00:00"
+
+  # ── Week 3 Document Refinery → Week 7 AI Extensions ──────────────────────
+  - subscription_id: "sub-006"
+    contract_id: "week3-document-refinery-extractions"
+    contract_version: "1.0.0"
+    subscriber_id: "week7-ai-extensions"
+    subscriber_team: "week7"
+    subscriber_description: "Uses extracted fact text for embedding drift detection baseline"
+    fields_consumed:
+      - extracted_facts
+      - doc_id
+      - extraction_model
+    breaking_fields:
+      - field: extracted_facts.confidence
+        reason: "Embedding drift baseline is computed only from facts with confidence >= 0.8; scale change corrupts the baseline corpus"
+      - field: extracted_facts
+        reason: "Array structure required for vectorisation; removing or renaming breaks embedding pipeline"
+    validation_mode: AUDIT   # AI extension — start in AUDIT; upgrade after baseline calibration
+    tier: 1
+    contact: "week7-team"
+    registered_at: "2026-04-01T00:00:00+00:00"
