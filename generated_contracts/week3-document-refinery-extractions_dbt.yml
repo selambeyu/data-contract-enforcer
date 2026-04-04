@@ -8,14 +8,12 @@ models:
     - not_null
     - unique
   - name: source_path
-    description: The source path is the file name of the input document.
     tests:
     - not_null
   - name: source_hash
     tests:
     - not_null
   - name: extraction_model
-    description: A unique identifier for the extraction model used in document refinement.
     tests:
     - not_null
     - accepted_values:
@@ -26,7 +24,6 @@ models:
         - vision-ocr-v1
         - vision-v1
   - name: processing_time_ms
-    description: The processing time in milliseconds for document extraction.
     tests:
     - not_null
   - name: extracted_at
@@ -38,7 +35,6 @@ models:
     - not_null
     - unique
   - name: fact_text
-    description: Text extracted from financial statements
     tests:
     - not_null
   - name: fact_confidence
@@ -47,4 +43,3 @@ models:
     tests:
     - not_null
   - name: fact_page_ref
-    description: A unique identifier for each fact page.

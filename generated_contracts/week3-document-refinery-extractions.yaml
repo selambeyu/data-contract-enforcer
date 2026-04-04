@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   owner: week7-enforcer
   description: 'Auto-generated contract for outputs/week3/extractions.jsonl. Source
-    snapshot: 3977ad436c588fd4. Generated at: 2026-04-04T11:57:47.067751+00:00.'
+    snapshot: 3977ad436c588fd4. Generated at: 2026-04-04T19:25:51.795217+00:00.'
 servers:
   local:
     type: local
@@ -25,14 +25,6 @@ schema:
   source_path:
     type: string
     required: true
-    llm_annotations:
-      description: The source path is the file name of the input document.
-      business_rule: The source path must be a non-empty string and match the file
-        extension of the input document.
-      cross_column_note: This field depends on the adjacent doc_id column for data
-        integrity.
-      annotated_by: llm
-    description: The source path is the file name of the input document.
   source_hash:
     type: string
     required: true
@@ -45,22 +37,20 @@ schema:
     - layout-vision-fallback-v1
     - vision-ocr-v1
     - vision-v1
-    llm_annotations:
-      description: A unique identifier for the extraction model used in document refinement.
-      business_rule: The value must be a valid UUID.
-      cross_column_note: No dependency on adjacent columns.
-      annotated_by: llm
-    description: A unique identifier for the extraction model used in document refinement.
   processing_time_ms:
     type: integer
     required: true
     minimum: 0
-    llm_annotations:
-      description: The processing time in milliseconds for document extraction.
-      business_rule: Values must be non-negative integers.
-      cross_column_note: Dependent on source_path and extraction_model.
-      annotated_by: llm
-    description: The processing time in milliseconds for document extraction.
+    baseline_statistics:
+      mean: 163230.82176
+      stddev: 89090.902384
+      min: 5.0
+      max: 324331.0
+      p25: 88659.0
+      p50: 126543.0
+      p75: 232622.0
+      p95: 324331.0
+      p99: 324331.0
   extracted_at:
     type: string
     required: true
@@ -74,12 +64,6 @@ schema:
   fact_text:
     type: string
     required: true
-    llm_annotations:
-      description: Text extracted from financial statements
-      business_rule: Values must be in the format of synthetic block X of Y from Z_Audited_Financial_Statement_Report
-      cross_column_note: No dependency on adjacent columns
-      annotated_by: llm
-    description: Text extracted from financial statements
   fact_confidence:
     type: number
     required: true
@@ -87,16 +71,30 @@ schema:
     maximum: 1.0
     description: Confidence score. Must remain 0.0–1.0 float. BREAKING CHANGE if changed
       to 0–100 integer percentage.
+    baseline_statistics:
+      mean: 0.898335
+      stddev: 0.020333
+      min: 0.65
+      max: 0.9
+      p25: 0.9
+      p50: 0.9
+      p75: 0.9
+      p95: 0.9
+      p99: 0.9
   fact_page_ref:
     type: number
     required: false
     minimum: 0
-    llm_annotations:
-      description: A unique identifier for each fact page.
-      business_rule: The value must be a valid integer greater than 0.
-      cross_column_note: Dependent on fact_fact_id and fact_text.
-      annotated_by: llm
-    description: A unique identifier for each fact page.
+    baseline_statistics:
+      mean: 737.823602
+      stddev: 628.891851
+      min: 1.0
+      max: 2926.0
+      p25: 210.0
+      p50: 571.0
+      p75: 1155.0
+      p95: 1817.0
+      p99: 2673.74
 quality:
   type: SodaChecks
   specification:

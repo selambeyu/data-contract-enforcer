@@ -371,6 +371,113 @@ def infer_type(dtype_str: str) -> str:
     return mapping.get(dtype_str, "string")
 
 
+def _distribution_warnings(profile: dict, col_name: str) -> list[dict]:
+    """
+    Detect suspicious numeric distributions and return a list of warning
+    annotations that are embedded directly in the contract clause.
+
+    Each warning is a dict with keys: code, message, severity.
+    Downstream tooling (ValidationRunner, ReportGenerator) can react to these
+    automatically without re-reading the source data.
+
+    Checks performed:
+      1. near_constant_high  — mean > 0.99 on a 0-1 field: all scores are
+         near-maximum, suggesting the model is over-confident or the field
+         was incorrectly normalised from a higher range.
+      2. near_constant_low   — mean < 0.01 on a 0-1 field: all scores are
+         near-zero, suggesting a scale inversion or uninitialized field.
+      3. low_variance        — stddev < 0.001 on a numeric field with
+         cardinality > 5: values are effectively constant despite appearing
+         to vary, suggesting a bug in the producer.
+      4. extreme_skew        — p99 > 10 × p50 for non-constant fields:
+         heavily right-skewed distribution, often caused by log-scale
+         confusion or outlier injection.
+      5. unexpected_negatives — min < 0 on a field that should be non-negative
+         (confidence, processing_time, counts).
+    """
+    warnings = []
+    dtype = profile.get("dtype", "")
+    if not any(t in dtype for t in ("float", "int")):
+        return warnings
+
+    mean   = profile.get("mean")
+    stddev = profile.get("stddev")
+    p50    = profile.get("p50")
+    p99    = profile.get("p99")
+    mn     = profile.get("min")
+    mx     = profile.get("max")
+
+    if mean is None:
+        return warnings
+
+    # 1. near_constant_high — mean > 0.99 on bounded 0–1 fields
+    if mx is not None and float(mx) <= 1.0 and mean > 0.99:
+        warnings.append({
+            "code":     "near_constant_high",
+            "severity": "WARN",
+            "message":  (
+                f"Column '{col_name}': mean={mean:.4f} is suspiciously close to maximum "
+                f"(max={mx}). All values are near the upper bound. Possible causes: "
+                f"model over-confidence, scale already in 0–100 range normalised back to 0–1, "
+                f"or field incorrectly populated with a constant."
+            ),
+        })
+
+    # 2. near_constant_low — mean < 0.01 on bounded 0–1 fields
+    if mx is not None and float(mx) <= 1.0 and mean < 0.01:
+        warnings.append({
+            "code":     "near_constant_low",
+            "severity": "WARN",
+            "message":  (
+                f"Column '{col_name}': mean={mean:.4f} is suspiciously close to zero "
+                f"(max={mx}). Possible causes: scale inversion (100 → 0.01 after ÷100), "
+                f"uninitialised field, or all extractions failed silently."
+            ),
+        })
+
+    # 3. low_variance — stddev nearly zero despite multiple distinct values
+    cardinality = profile.get("cardinality_estimate", 0)
+    if stddev is not None and stddev < 0.001 and cardinality > 5:
+        warnings.append({
+            "code":     "low_variance",
+            "severity": "WARN",
+            "message":  (
+                f"Column '{col_name}': stddev={stddev:.6f} with cardinality={cardinality}. "
+                f"Values appear effectively constant despite {cardinality} distinct entries. "
+                f"Possible bug in producer rounding or clamping logic."
+            ),
+        })
+
+    # 4. extreme_skew — p99 > 10× p50 (non-zero median)
+    if p50 is not None and p99 is not None and p50 > 0 and p99 > 10 * p50:
+        warnings.append({
+            "code":     "extreme_skew",
+            "severity": "WARN",
+            "message":  (
+                f"Column '{col_name}': p99={p99:.2f} is {p99/p50:.0f}× the median "
+                f"p50={p50:.2f}. Heavily right-skewed. Possible causes: outlier injection, "
+                f"log-scale confusion, or the field mixes two distinct populations."
+            ),
+        })
+
+    # 5. unexpected_negatives — min < 0 on fields that should be non-negative
+    _NON_NEGATIVE_HINTS = ("confidence", "time_ms", "count", "rate", "score", "tokens", "cost")
+    if mn is not None and float(mn) < 0:
+        if any(hint in col_name.lower() for hint in _NON_NEGATIVE_HINTS):
+            warnings.append({
+                "code":     "unexpected_negatives",
+                "severity": "HIGH",
+                "message":  (
+                    f"Column '{col_name}': min={mn:.4f} is negative. "
+                    f"This field is expected to be non-negative. "
+                    f"Possible causes: signed-integer overflow, missing abs(), "
+                    f"or delta values being written instead of absolute values."
+                ),
+            })
+
+    return warnings
+
+
 def column_to_clause(profile: dict) -> dict:
     clause: dict[str, Any] = {
         "type": infer_type(profile["dtype"]),
@@ -411,6 +518,28 @@ def column_to_clause(profile: dict) -> dict:
     if clause["type"] in ("number", "integer") and "min" in profile and "confidence" not in profile["name"]:
         if profile["min"] >= 0:
             clause["minimum"] = 0
+
+    # Rule 6: embed numeric baseline statistics into the clause
+    # These are persisted here so downstream tooling (ValidationRunner,
+    # SchemaEvolutionAnalyzer) can read them directly from the contract
+    # without accessing the original source data.
+    if profile.get("mean") is not None:
+        clause["baseline_statistics"] = {
+            "mean":   round(profile["mean"],   6),
+            "stddev": round(profile.get("stddev", 0.0), 6),
+            "min":    round(profile.get("min",  0.0), 6),
+            "max":    round(profile.get("max",  0.0), 6),
+            "p25":    round(profile.get("p25",  0.0), 6),
+            "p50":    round(profile.get("p50",  0.0), 6),
+            "p75":    round(profile.get("p75",  0.0), 6),
+            "p95":    round(profile.get("p95",  0.0), 6),
+            "p99":    round(profile.get("p99",  0.0), 6),
+        }
+
+    # Rule 7: distribution warning annotations for suspicious distributions
+    dist_warnings = _distribution_warnings(profile, profile["name"])
+    if dist_warnings:
+        clause["distribution_warnings"] = dist_warnings
 
     return clause
 
@@ -561,6 +690,84 @@ def _contract_title(contract_id: str) -> str:
     return contract_id.replace("-", " ").replace("_", " ").title()
 
 
+# ── Baseline statistics artifact ─────────────────────────────────────────────
+
+def write_numeric_baselines(
+    column_profiles: dict[str, dict],
+    contract_id: str,
+    baselines_path: str | Path = "schema_snapshots/baselines.json",
+) -> Path:
+    """
+    Persist mean and stddev for every numeric column to a dedicated
+    schema_snapshots/baselines.json artifact.
+
+    The ValidationRunner reads this file to compute z-score drift checks.
+    The SchemaEvolutionAnalyzer reads it to detect scale mutations between
+    generator runs without needing the original source data.
+
+    The file is a flat dict keyed by "{contract_id}.{column_name}" so that
+    multiple contracts can share a single baselines.json without collision:
+
+    {
+      "week3-document-refinery-extractions.fact_confidence": {
+        "mean": 0.8983, "stddev": 0.0421, "min": 0.65, "max": 0.9,
+        "p25": 0.88, "p50": 0.9, "p75": 0.9, "p95": 0.9, "p99": 0.9,
+        "captured_at": "2026-04-04T12:00:00+00:00",
+        "contract_id": "week3-document-refinery-extractions",
+        "column": "fact_confidence",
+        "distribution_warnings": []
+      },
+      ...
+    }
+
+    Calling this function MERGES the new entries into the existing file —
+    previous contract baselines are preserved unless overwritten.
+    """
+    baselines_path = Path(baselines_path)
+    baselines_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Load existing baselines (if any)
+    existing: dict = {}
+    if baselines_path.exists():
+        try:
+            with open(baselines_path) as f:
+                existing = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            existing = {}
+
+    now_iso = datetime.now(timezone.utc).isoformat()
+    updated = 0
+
+    for col, profile in column_profiles.items():
+        if profile.get("mean") is None:
+            continue  # skip non-numeric columns
+
+        key = f"{contract_id}.{col}"
+        dist_warnings = _distribution_warnings(profile, col)
+
+        existing[key] = {
+            "contract_id":  contract_id,
+            "column":       col,
+            "mean":         round(profile["mean"],            6),
+            "stddev":       round(profile.get("stddev", 0.0), 6),
+            "min":          round(profile.get("min",   0.0),  6),
+            "max":          round(profile.get("max",   0.0),  6),
+            "p25":          round(profile.get("p25",   0.0),  6),
+            "p50":          round(profile.get("p50",   0.0),  6),
+            "p75":          round(profile.get("p75",   0.0),  6),
+            "p95":          round(profile.get("p95",   0.0),  6),
+            "p99":          round(profile.get("p99",   0.0),  6),
+            "captured_at":  now_iso,
+            "distribution_warnings": dist_warnings,
+        }
+        updated += 1
+
+    with open(baselines_path, "w") as f:
+        json.dump(existing, f, indent=2)
+
+    return baselines_path
+
+
 # ── Write YAML ────────────────────────────────────────────────────────────────
 
 def write_yaml(contract: dict, output_dir: str | Path, contract_id: str) -> Path:
@@ -671,6 +878,11 @@ def main() -> None:
         action="store_true",
         help="Skip LLM annotation step even if a backend is available",
     )
+    parser.add_argument(
+        "--baselines",
+        default="schema_snapshots/baselines.json",
+        help="Path to persist numeric baseline statistics (default: schema_snapshots/baselines.json)",
+    )
     args = parser.parse_args()
 
     print(f"[generator] Loading {args.source} ...")
@@ -706,6 +918,16 @@ def main() -> None:
             f"cardinality={profile['cardinality_estimate']}"
         )
 
+    # ── Stage 2.5: Distribution warning scan
+    all_warnings = []
+    for col, profile in column_profiles.items():
+        warnings = _distribution_warnings(profile, col)
+        for w in warnings:
+            print(f"[generator] DIST WARNING [{w['severity']}] {w['code']}: {w['message'][:100]}")
+            all_warnings.append(w)
+    if not all_warnings:
+        print("[generator] Stage 2.5: No suspicious distributions detected.")
+
     # ── Stage 3: Build contract
     print("[generator] Stage 3: Building Bitol YAML clauses ...")
     contract = build_contract(column_profiles, args.contract_id, args.source, records)
@@ -733,6 +955,13 @@ def main() -> None:
     output_path = write_yaml(contract, args.output, args.contract_id)
     clause_count = len(contract["schema"])
     print(f"[generator] Contract YAML: {clause_count} clauses → {output_path}")
+
+    # ── Write dedicated numeric baselines artifact
+    baselines_path = write_numeric_baselines(
+        column_profiles, args.contract_id, args.baselines
+    )
+    numeric_cols = sum(1 for p in column_profiles.values() if p.get("mean") is not None)
+    print(f"[generator] Numeric baselines → {baselines_path} ({numeric_cols} columns persisted)")
 
     # ── Write dbt schema.yml counterpart
     dbt_path = write_dbt_schema(contract["schema"], args.contract_id, args.output)

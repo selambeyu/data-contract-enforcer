@@ -374,6 +374,95 @@ def build_blame_chain(
     return chain
 
 
+# ── Contamination depth calculation ──────────────────────────────────────────
+
+def _compute_contamination_depths(
+    producer_contract_id: str,
+    subscriber_ids: list[str],
+    snapshot: dict,
+) -> dict[str, int]:
+    """
+    For each subscriber_id, compute the minimum BFS hop distance from the
+    producer node (identified by producer_contract_id) to that subscriber
+    through the lineage graph.
+
+    Returns {subscriber_id: depth} where depth >= 1.
+    depth=1 means the subscriber is directly connected to the producer.
+    depth=N means there are N-1 intermediate system hops between them.
+
+    If the subscriber cannot be found in the lineage graph, defaults to 1
+    (direct connection assumed — conservative estimate).
+
+    contamination_depth lets downstream tooling quantify propagation severity:
+    a violation at depth=1 is contained; at depth=3 it has crossed three
+    system boundaries and is significantly harder to roll back.
+    """
+    if not snapshot or not subscriber_ids:
+        return {sid: 1 for sid in subscriber_ids}
+
+    nodes_by_id   = {n["node_id"]: n for n in snapshot.get("nodes", [])}
+    edges          = snapshot.get("edges", [])
+
+    # Build forward adjacency (producer → consumers)
+    forward_adj: dict[str, list[str]] = {}
+    for edge in edges:
+        rel = edge.get("relationship", "")
+        if rel in ("PRODUCES", "WRITES", "CONSUMES", "READS"):
+            src = edge.get("source", "")
+            tgt = edge.get("target", "")
+            if src and tgt:
+                forward_adj.setdefault(src, []).append(tgt)
+
+    # Find seed nodes whose label or node_id contains the producer contract ID
+    # Strip hyphens for fuzzy matching (week3-document-refinery → week3 document refinery)
+    id_stem = producer_contract_id.lower().replace("-", "").replace("_", "")
+    seed_nodes = [
+        nid for nid, n in nodes_by_id.items()
+        if (
+            id_stem in nid.lower().replace("-", "").replace("_", "")
+            or id_stem in n.get("label", "").lower().replace("-", "").replace("_", "")
+        )
+    ]
+    if not seed_nodes:
+        # No node found for producer — return default depth=1 for all
+        return {sid: 1 for sid in subscriber_ids}
+
+    # BFS forward from producer seeds; record depth at which each node_id is reached
+    visited: dict[str, int] = {}   # node_id → depth
+    queue: deque[tuple[str, int]] = deque()
+    for nid in seed_nodes:
+        queue.append((nid, 0))
+
+    while queue:
+        node_id, depth = queue.popleft()
+        if node_id in visited:
+            continue
+        visited[node_id] = depth
+        for nxt in forward_adj.get(node_id, []):
+            if nxt not in visited:
+                queue.append((nxt, depth + 1))
+
+    # Map each subscriber_id to its reached depth (default 1 if not found)
+    result: dict[str, int] = {}
+    for sid in subscriber_ids:
+        if sid in visited:
+            # depth=0 means it is the producer itself; consumers start at depth>=1
+            result[sid] = max(1, visited[sid])
+        else:
+            # Subscriber not found in graph — try partial label match
+            matched_depth = None
+            sid_stem = sid.lower().replace("-", "").replace("_", "")
+            for nid, depth in visited.items():
+                nid_stem = nid.lower().replace("-", "").replace("_", "")
+                lbl_stem = nodes_by_id.get(nid, {}).get("label", "").lower().replace("-", "").replace("_", "")
+                if sid_stem in nid_stem or sid_stem in lbl_stem:
+                    matched_depth = max(1, depth)
+                    break
+            result[sid] = matched_depth if matched_depth is not None else 1
+
+    return result
+
+
 # ── Step 4: Build spec-compliant violation entry ───────────────────────────────
 
 def build_violation_entry(
@@ -442,6 +531,24 @@ def build_violation_entry(
         tier = affected_subs[0].get("tier", 1) if affected_subs else 1
         chain = build_blame_chain(producers, field_name, codebase_root, tier)
 
+        # ── Compute contamination_depth per affected node ──────────────────────
+        # contamination_depth = min BFS hops from the violating producer to each
+        # subscriber in the lineage graph.  depth=1 means directly connected;
+        # depth=N means the corruption must traverse N inter-system hops before
+        # reaching that subscriber.  depth=0 is reserved for the producer itself.
+        contamination_map = _compute_contamination_depths(
+            contract_id, [n["node_id"] for n in affected_nodes], snapshot
+        )
+
+        # Annotate each affected_node with its contamination_depth
+        for node in affected_nodes:
+            node["contamination_depth"] = contamination_map.get(node["node_id"], 1)
+
+        # Summary metric: max contamination depth across all affected subscribers
+        max_depth_observed = max(
+            (n["contamination_depth"] for n in affected_nodes), default=0
+        )
+
         entries.append({
             "violation_id": str(uuid.uuid4()),
             "check_id": check_id,
@@ -461,6 +568,9 @@ def build_violation_entry(
                 "affected_nodes": affected_nodes,
                 "affected_pipelines": list(set(affected_pipelines)),
                 "estimated_records": records_failing,
+                # contamination_depth quantifies propagation severity:
+                # higher depth = corruption travels further before detection
+                "max_contamination_depth": max_depth_observed,
             },
         })
 
@@ -536,10 +646,12 @@ def main() -> None:
         print(f"    severity    : {entry['severity']}")
         br = entry["blast_radius"]
         print(f"    blast radius: {len(br['affected_nodes'])} subscriber(s), "
-              f"~{br['estimated_records']} records")
+              f"~{br['estimated_records']} records, "
+              f"max_contamination_depth={br.get('max_contamination_depth', 'n/a')}")
         for node in br["affected_nodes"]:
             print(f"      → {node['node_id']} (tier={node['tier']}, "
-                  f"mode={node['validation_mode']})")
+                  f"mode={node['validation_mode']}, "
+                  f"contamination_depth={node.get('contamination_depth', 'n/a')})")
         chain = entry["blame_chain"]
         print(f"    blame chain : {len(chain)} candidate(s)")
         for bc in chain[:3]:

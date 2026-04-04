@@ -38,5 +38,50 @@
   "total_cost": {
     "mean": 0.0001970625,
     "stddev": 0.00011216553455878121
+  },
+  "week3-document-refinery-extractions.processing_time_ms": {
+    "contract_id": "week3-document-refinery-extractions",
+    "column": "processing_time_ms",
+    "mean": 163230.82176,
+    "stddev": 89090.902384,
+    "min": 5.0,
+    "max": 324331.0,
+    "p25": 88659.0,
+    "p50": 126543.0,
+    "p75": 232622.0,
+    "p95": 324331.0,
+    "p99": 324331.0,
+    "captured_at": "2026-04-04T19:25:51.813885+00:00",
+    "distribution_warnings": []
+  },
+  "week3-document-refinery-extractions.fact_confidence": {
+    "contract_id": "week3-document-refinery-extractions",
+    "column": "fact_confidence",
+    "mean": 0.898335,
+    "stddev": 0.020333,
+    "min": 0.65,
+    "max": 0.9,
+    "p25": 0.9,
+    "p50": 0.9,
+    "p75": 0.9,
+    "p95": 0.9,
+    "p99": 0.9,
+    "captured_at": "2026-04-04T19:25:51.813885+00:00",
+    "distribution_warnings": []
+  },
+  "week3-document-refinery-extractions.fact_page_ref": {
+    "contract_id": "week3-document-refinery-extractions",
+    "column": "fact_page_ref",
+    "mean": 737.823602,
+    "stddev": 628.891851,
+    "min": 1.0,
+    "max": 2926.0,
+    "p25": 210.0,
+    "p50": 571.0,
+    "p75": 1155.0,
+    "p95": 1817.0,
+    "p99": 2673.74,
+    "captured_at": "2026-04-04T19:25:51.813885+00:00",
+    "distribution_warnings": []
   }
 }
