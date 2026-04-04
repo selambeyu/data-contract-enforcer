@@ -2,22 +2,35 @@
 ValidationRunner — executes all contract checks against a dataset snapshot.
 
 Usage:
-    uv run python src/contracts/runner.py \
+    uv run src/contracts/runner.py \
         --contract generated_contracts/week3-document-refinery-extractions.yaml \
         --data outputs/week3/extractions.jsonl \
-        --output validation_reports/week3_baseline.json
+        --output validation_reports/week3_baseline.json \
+        --mode AUDIT
 
-Check order (per spec):
-    Structural first: required, type, enum, uuid_pattern, datetime_format
-    Statistical second: range, statistical_drift
+Enforcement modes (--mode):
+    AUDIT   — run all checks, log all results, never block pipeline [default]
+    WARN    — block (exit 1) on CRITICAL only; annotate HIGH/MEDIUM and pass through
+    ENFORCE — block on any CRITICAL or HIGH violation
 
-Rule: never crash — always produce a report even on broken input.
+Severity levels:
+    CRITICAL — structural violation (missing required field, wrong type, UUID fails)
+    HIGH     — range violation OR statistical drift > 3 stddev
+    MEDIUM   — statistical drift 2–3 stddev
+    WARNING  — near-threshold (informational)
+    LOW      — informational
+
+check_id format: {contract_id}.{column_name}.{check_type}
+  e.g. week3-document-refinery-extractions.fact_confidence.range
+
+Rule: never crash — always produce a complete report even on broken input.
 """
 
 import argparse
 import hashlib
 import json
 import re
+import sys
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -25,6 +38,23 @@ from typing import Any
 
 import pandas as pd
 import yaml
+
+
+# ── Enforcement mode helpers ──────────────────────────────────────────────────
+
+SEVERITY_RANK = {"CRITICAL": 5, "HIGH": 4, "MEDIUM": 3, "WARNING": 2, "LOW": 1, "PASS": 0}
+
+
+def should_block(report: dict, mode: str) -> bool:
+    """Return True if the pipeline should be blocked given the mode and report."""
+    if mode == "AUDIT":
+        return False
+    if mode == "WARN":
+        return report.get("critical", 0) > 0
+    if mode == "ENFORCE":
+        return report.get("critical", 0) > 0 or report.get("high", 0) > 0
+    return False
+
 
 # ── Loaders ───────────────────────────────────────────────────────────────────
 
@@ -62,9 +92,17 @@ def snapshot_id(data_path: str | Path) -> str:
         return hashlib.sha256(f.read(65536)).hexdigest()
 
 
-# ── DataFrame builder (mirrors generator flatten logic) ───────────────────────
+# ── DataFrame builder ─────────────────────────────────────────────────────────
 
 _PREFERRED_EXPLODE_KEYS = ["extracted_facts", "nodes", "edges", "events", "items", "records"]
+_PREFIX_MAP = {
+    "extracted_facts": "fact_",
+    "nodes": "node_",
+    "edges": "edge_",
+    "events": "event_",
+    "items": "item_",
+    "records": "record_",
+}
 
 
 def _pick_explode_key(record: dict) -> str | None:
@@ -82,18 +120,8 @@ def _pick_explode_key(record: dict) -> str | None:
 def flatten_for_validation(records: list[dict]) -> pd.DataFrame:
     if not records:
         return pd.DataFrame()
-
-    _PREFIX_MAP = {
-        "extracted_facts": "fact_",
-        "nodes": "node_",
-        "edges": "edge_",
-        "events": "event_",
-        "items": "item_",
-        "records": "record_",
-    }
     explode_key = _pick_explode_key(records[0])
     prefix = _PREFIX_MAP.get(explode_key, explode_key.rstrip("s") + "_") if explode_key else ""
-
     rows = []
     for r in records:
         base = {
@@ -147,16 +175,22 @@ def _result(
     }
 
 
+def _cid(contract_id: str, col: str) -> str:
+    """Build dot-scoped check_id prefix: {contract_id}.{col}"""
+    return f"{contract_id}.{col}"
+
+
 # ── Structural checks ─────────────────────────────────────────────────────────
 
-def check_required_fields(df: pd.DataFrame, schema: dict) -> list[dict]:
+def check_required_fields(df: pd.DataFrame, schema: dict, contract_id: str = "") -> list[dict]:
     results = []
     for col, clause in schema.items():
         if not clause.get("required", False):
             continue
+        prefix = _cid(contract_id, col)
         if col not in df.columns:
             results.append(_result(
-                check_id=f"{col}.required.present",
+                check_id=f"{prefix}.required.present",
                 column_name=col,
                 check_type="required",
                 status="CRITICAL",
@@ -170,7 +204,7 @@ def check_required_fields(df: pd.DataFrame, schema: dict) -> list[dict]:
         null_count = int(df[col].isna().sum())
         if null_count > 0:
             results.append(_result(
-                check_id=f"{col}.required.no_nulls",
+                check_id=f"{prefix}.required.no_nulls",
                 column_name=col,
                 check_type="required",
                 status="CRITICAL",
@@ -182,7 +216,7 @@ def check_required_fields(df: pd.DataFrame, schema: dict) -> list[dict]:
             ))
         else:
             results.append(_result(
-                check_id=f"{col}.required.no_nulls",
+                check_id=f"{prefix}.required.no_nulls",
                 column_name=col,
                 check_type="required",
                 status="PASS",
@@ -194,23 +228,24 @@ def check_required_fields(df: pd.DataFrame, schema: dict) -> list[dict]:
     return results
 
 
-def check_type_match(df: pd.DataFrame, schema: dict) -> list[dict]:
+def check_type_match(df: pd.DataFrame, schema: dict, contract_id: str = "") -> list[dict]:
     BITOL_TO_PANDAS = {
-        "number": ["float64", "float32", "int64", "int32"],
+        "number":  ["float64", "float32", "int64", "int32"],
         "integer": ["int64", "int32", "int16", "int8"],
         "boolean": ["bool"],
-        "string": ["object"],
+        "string":  ["object"],
     }
     results = []
     for col, clause in schema.items():
         expected_type = clause.get("type")
         if not expected_type or col not in df.columns:
             continue
+        prefix = _cid(contract_id, col)
         actual_dtype = str(df[col].dtype)
         allowed = BITOL_TO_PANDAS.get(expected_type, [])
         if allowed and actual_dtype not in allowed:
             results.append(_result(
-                check_id=f"{col}.type_match",
+                check_id=f"{prefix}.type_match",
                 column_name=col,
                 check_type="type",
                 status="CRITICAL",
@@ -221,7 +256,7 @@ def check_type_match(df: pd.DataFrame, schema: dict) -> list[dict]:
             ))
         else:
             results.append(_result(
-                check_id=f"{col}.type_match",
+                check_id=f"{prefix}.type_match",
                 column_name=col,
                 check_type="type",
                 status="PASS",
@@ -233,38 +268,39 @@ def check_type_match(df: pd.DataFrame, schema: dict) -> list[dict]:
     return results
 
 
-def check_enum_conformance(df: pd.DataFrame, schema: dict) -> list[dict]:
+def check_enum_conformance(df: pd.DataFrame, schema: dict, contract_id: str = "") -> list[dict]:
     results = []
     for col, clause in schema.items():
         enum_vals = clause.get("enum")
         if not enum_vals or col not in df.columns:
             continue
+        prefix = _cid(contract_id, col)
         non_null = df[col].dropna()
         bad_mask = ~non_null.isin(enum_vals)
         bad_count = int(bad_mask.sum())
         bad_sample = list(non_null[bad_mask].unique()[:5])
         if bad_count > 0:
             results.append(_result(
-                check_id=f"{col}.enum_conformance",
+                check_id=f"{prefix}.enum_conformance",
                 column_name=col,
                 check_type="enum",
-                status="FAIL",
+                status="CRITICAL",
                 actual_value=f"{bad_count} non-conforming values",
                 expected=f"all values in {enum_vals}",
-                severity="FAIL",
+                severity="CRITICAL",
                 records_failing=bad_count,
                 sample_failing=[str(v) for v in bad_sample],
                 message=f"Column '{col}' has {bad_count} values outside enum: {bad_sample}",
             ))
         else:
             results.append(_result(
-                check_id=f"{col}.enum_conformance",
+                check_id=f"{prefix}.enum_conformance",
                 column_name=col,
                 check_type="enum",
                 status="PASS",
                 actual_value="all values conforming",
                 expected=f"all values in {enum_vals}",
-                severity="FAIL",
+                severity="CRITICAL",
                 message=f"Column '{col}' all values within enum.",
             ))
     return results
@@ -275,49 +311,52 @@ _UUID_RE = re.compile(
 )
 
 
-def check_uuid_pattern(df: pd.DataFrame, schema: dict) -> list[dict]:
+def check_uuid_pattern(df: pd.DataFrame, schema: dict, contract_id: str = "") -> list[dict]:
     results = []
     for col, clause in schema.items():
         if clause.get("format") != "uuid" or col not in df.columns:
             continue
+        prefix = _cid(contract_id, col)
         non_null = df[col].dropna().astype(str)
-        # Sample up to 100 if large dataset
-        sample = non_null.sample(min(100, len(non_null)), random_state=42) if len(non_null) > 10000 else non_null
-        bad_mask = ~sample.str.match(_UUID_RE)
+        # Full scan — sample only for very large datasets
+        if len(non_null) > 50000:
+            non_null = non_null.sample(1000, random_state=42)
+        bad_mask = ~non_null.str.match(_UUID_RE)
         bad_count = int(bad_mask.sum())
-        bad_sample = list(sample[bad_mask].unique()[:5])
+        bad_sample = list(non_null[bad_mask].unique()[:5])
         if bad_count > 0:
             results.append(_result(
-                check_id=f"{col}.uuid_pattern",
+                check_id=f"{prefix}.uuid_pattern",
                 column_name=col,
                 check_type="uuid_pattern",
-                status="FAIL",
+                status="CRITICAL",
                 actual_value=f"{bad_count} values fail UUID regex",
                 expected="all values match ^[0-9a-f]{8}-...-[0-9a-f]{12}$",
-                severity="FAIL",
+                severity="CRITICAL",
                 records_failing=bad_count,
                 sample_failing=[str(v) for v in bad_sample],
                 message=f"Column '{col}' has {bad_count} values that are not valid UUIDs.",
             ))
         else:
             results.append(_result(
-                check_id=f"{col}.uuid_pattern",
+                check_id=f"{prefix}.uuid_pattern",
                 column_name=col,
                 check_type="uuid_pattern",
                 status="PASS",
                 actual_value="all values match UUID pattern",
                 expected="UUID format",
-                severity="FAIL",
+                severity="CRITICAL",
                 message=f"Column '{col}' all values are valid UUIDs.",
             ))
     return results
 
 
-def check_datetime_format(df: pd.DataFrame, schema: dict) -> list[dict]:
+def check_datetime_format(df: pd.DataFrame, schema: dict, contract_id: str = "") -> list[dict]:
     results = []
     for col, clause in schema.items():
         if clause.get("format") != "date-time" or col not in df.columns:
             continue
+        prefix = _cid(contract_id, col)
         non_null = df[col].dropna().astype(str)
         bad_vals = []
         for v in non_null:
@@ -328,26 +367,26 @@ def check_datetime_format(df: pd.DataFrame, schema: dict) -> list[dict]:
         bad_count = len(bad_vals)
         if bad_count > 0:
             results.append(_result(
-                check_id=f"{col}.datetime_format",
+                check_id=f"{prefix}.datetime_format",
                 column_name=col,
                 check_type="datetime_format",
-                status="FAIL",
+                status="CRITICAL",
                 actual_value=f"{bad_count} unparseable values",
                 expected="all values parseable as ISO 8601",
-                severity="FAIL",
+                severity="CRITICAL",
                 records_failing=bad_count,
                 sample_failing=bad_vals[:5],
                 message=f"Column '{col}' has {bad_count} values that are not valid ISO 8601 datetimes.",
             ))
         else:
             results.append(_result(
-                check_id=f"{col}.datetime_format",
+                check_id=f"{prefix}.datetime_format",
                 column_name=col,
                 check_type="datetime_format",
                 status="PASS",
                 actual_value="all values parse as ISO 8601",
                 expected="ISO 8601 date-time",
-                severity="FAIL",
+                severity="CRITICAL",
                 message=f"Column '{col}' all values are valid ISO 8601 datetimes.",
             ))
     return results
@@ -355,7 +394,7 @@ def check_datetime_format(df: pd.DataFrame, schema: dict) -> list[dict]:
 
 # ── Statistical checks ────────────────────────────────────────────────────────
 
-def check_range(df: pd.DataFrame, schema: dict) -> list[dict]:
+def check_range(df: pd.DataFrame, schema: dict, contract_id: str = "") -> list[dict]:
     results = []
     for col, clause in schema.items():
         has_min = "minimum" in clause
@@ -364,23 +403,17 @@ def check_range(df: pd.DataFrame, schema: dict) -> list[dict]:
             continue
         if not pd.api.types.is_numeric_dtype(df[col]):
             continue
+        prefix = _cid(contract_id, col)
         non_null = df[col].dropna()
         if len(non_null) == 0:
             continue
-
         data_min = float(non_null.min())
         data_max = float(non_null.max())
         failures = []
-
         if has_min and data_min < clause["minimum"]:
-            failures.append(
-                f"min={data_min:.4f} < contract minimum={clause['minimum']}"
-            )
+            failures.append(f"min={data_min:.4f} < contract minimum={clause['minimum']}")
         if has_max and data_max > clause["maximum"]:
-            failures.append(
-                f"max={data_max:.4f} > contract maximum={clause['maximum']}"
-            )
-
+            failures.append(f"max={data_max:.4f} > contract maximum={clause['maximum']}")
         if failures:
             bad_count = 0
             if has_min:
@@ -388,23 +421,25 @@ def check_range(df: pd.DataFrame, schema: dict) -> list[dict]:
             if has_max:
                 bad_count += int((non_null > clause["maximum"]).sum())
             results.append(_result(
-                check_id=f"{col}.range",
+                check_id=f"{prefix}.range",
                 column_name=col,
                 check_type="range",
-                status="CRITICAL",
+                status="HIGH",
                 actual_value=f"min={data_min:.4f}, max={data_max:.4f}",
                 expected=(
                     f"min>={clause.get('minimum', '-inf')}, "
                     f"max<={clause.get('maximum', '+inf')}"
                 ),
-                severity="CRITICAL",
+                severity="HIGH",
                 records_failing=bad_count,
-                message=f"Range violation on '{col}': {'; '.join(failures)}. "
-                        f"This is the check that catches a 0.0–1.0 → 0–100 scale change.",
+                message=(
+                    f"Range violation on '{col}': {'; '.join(failures)}. "
+                    f"This is the check that catches a 0.0–1.0 → 0–100 scale change."
+                ),
             ))
         else:
             results.append(_result(
-                check_id=f"{col}.range",
+                check_id=f"{prefix}.range",
                 column_name=col,
                 check_type="range",
                 status="PASS",
@@ -413,7 +448,7 @@ def check_range(df: pd.DataFrame, schema: dict) -> list[dict]:
                     f"min>={clause.get('minimum', '-inf')}, "
                     f"max<={clause.get('maximum', '+inf')}"
                 ),
-                severity="CRITICAL",
+                severity="HIGH",
                 message=f"Column '{col}' values within contract range.",
             ))
     return results
@@ -426,8 +461,8 @@ def check_statistical_drift(
     baselines: dict,
 ) -> dict | None:
     """
-    Returns WARN if z_score > 2, FAIL if z_score > 3, None if no baseline yet.
-    Baseline is written after this run.
+    Returns MEDIUM if z_score > 2, HIGH if z_score > 3, None if no baseline yet.
+    Spec: WARNING at 2 stddev, FAIL (HIGH) at 3 stddev.
     """
     if column not in baselines:
         return None
@@ -435,68 +470,60 @@ def check_statistical_drift(
     z_score = abs(current_mean - b["mean"]) / max(b["stddev"], 1e-9)
     if z_score > 3:
         return {
-            "status": "FAIL",
+            "status": "HIGH",
             "z_score": round(z_score, 2),
-            "message": f"{column} mean drifted {z_score:.1f} stddev from baseline",
+            "message": f"{column} mean drifted {z_score:.1f} stddev from baseline (HIGH — exceeds 3σ threshold)",
         }
     elif z_score > 2:
         return {
-            "status": "WARN",
+            "status": "MEDIUM",
             "z_score": round(z_score, 2),
-            "message": f"{column} mean drifted {z_score:.1f} stddev from baseline (warning threshold)",
+            "message": f"{column} mean drifted {z_score:.1f} stddev from baseline (MEDIUM — between 2σ and 3σ)",
         }
     return {"status": "PASS", "z_score": round(z_score, 2), "message": "Within baseline."}
 
 
 def run_statistical_drift_checks(
-    df: pd.DataFrame, schema: dict, baselines: dict
+    df: pd.DataFrame, schema: dict, baselines: dict, contract_id: str = ""
 ) -> tuple[list[dict], dict]:
-    """
-    Returns (results, updated_baselines).
-    Updates baselines with current stats for columns that have no baseline yet.
-    """
+    """Returns (results, updated_baselines)."""
     results = []
     updated = dict(baselines)
-
     for col in df.columns:
         if not pd.api.types.is_numeric_dtype(df[col]):
             continue
         non_null = df[col].dropna()
         if len(non_null) < 2:
             continue
+        prefix = _cid(contract_id, col)
         current_mean = float(non_null.mean())
         current_std = float(non_null.std())
-
         drift = check_statistical_drift(col, current_mean, current_std, baselines)
-
         if drift is None:
-            # No baseline yet — record current stats, skip check
             updated[col] = {"mean": current_mean, "stddev": current_std}
             results.append(_result(
-                check_id=f"{col}.statistical_drift",
+                check_id=f"{prefix}.statistical_drift",
                 column_name=col,
                 check_type="statistical_drift",
                 status="PASS",
                 actual_value=f"mean={current_mean:.4f}, stddev={current_std:.4f}",
                 expected="baseline established (first run)",
-                severity="WARN",
+                severity="HIGH",
                 message=f"No baseline for '{col}' — baseline recorded for future runs.",
             ))
         else:
             status = drift["status"]
-            severity = "FAIL" if status == "FAIL" else "WARN"
             results.append(_result(
-                check_id=f"{col}.statistical_drift",
+                check_id=f"{prefix}.statistical_drift",
                 column_name=col,
                 check_type="statistical_drift",
                 status=status,
                 actual_value=f"mean={current_mean:.4f}, z_score={drift['z_score']}",
                 expected=f"z_score <= 2 (baseline mean={baselines[col]['mean']:.4f})",
-                severity=severity,
+                severity=status,
                 records_failing=0,
                 message=drift["message"],
             ))
-
     return results, updated
 
 
@@ -507,6 +534,7 @@ def build_report(
     contract_id: str,
     snap_id: str,
     data_path: str,
+    mode: str = "AUDIT",
 ) -> dict:
     statuses = [r["status"] for r in results]
     return {
@@ -515,10 +543,12 @@ def build_report(
         "snapshot_id": snap_id,
         "data_path": str(data_path),
         "run_timestamp": datetime.now(timezone.utc).isoformat(),
+        "enforcement_mode": mode,
         "total_checks": len(results),
-        "passed": statuses.count("PASS"),
-        "failed": statuses.count("FAIL"),
-        "warned": statuses.count("WARN"),
+        "passed":  statuses.count("PASS"),
+        "failed":  statuses.count("FAIL"),     # legacy — kept for compat
+        "warned":  statuses.count("WARNING") + statuses.count("MEDIUM"),
+        "high":    statuses.count("HIGH"),
         "critical": statuses.count("CRITICAL"),
         "errored": statuses.count("ERROR"),
         "results": results,
@@ -539,11 +569,22 @@ def main() -> None:
         default="schema_snapshots/baselines.json",
         help="Path to baselines JSON (default: schema_snapshots/baselines.json)",
     )
+    parser.add_argument(
+        "--mode",
+        default="AUDIT",
+        choices=["AUDIT", "WARN", "ENFORCE"],
+        help=(
+            "Enforcement mode: "
+            "AUDIT=log only (default), "
+            "WARN=block on CRITICAL, "
+            "ENFORCE=block on CRITICAL or HIGH"
+        ),
+    )
     args = parser.parse_args()
 
     all_results: list[dict] = []
 
-    # ── Load inputs
+    print(f"[runner] Mode      : {args.mode}")
     print(f"[runner] Loading contract: {args.contract}")
     contract = load_contract(args.contract)
     schema = contract.get("schema", {})
@@ -559,7 +600,7 @@ def main() -> None:
     except Exception as exc:
         print(f"[runner] ERROR loading data: {exc}")
         all_results.append(_result(
-            check_id="data.load",
+            check_id=f"{contract_id}.__file__.load",
             column_name="__file__",
             check_type="load",
             status="ERROR",
@@ -573,31 +614,31 @@ def main() -> None:
     if data_ok:
         snap = snapshot_id(args.data)
 
-        # ── Structural checks (always run in this order)
+        # ── Structural checks
         print("[runner] Running structural checks ...")
-        all_results += check_required_fields(df, schema)
-        all_results += check_type_match(df, schema)
-        all_results += check_enum_conformance(df, schema)
-        all_results += check_uuid_pattern(df, schema)
-        all_results += check_datetime_format(df, schema)
+        all_results += check_required_fields(df, schema, contract_id)
+        all_results += check_type_match(df, schema, contract_id)
+        all_results += check_enum_conformance(df, schema, contract_id)
+        all_results += check_uuid_pattern(df, schema, contract_id)
+        all_results += check_datetime_format(df, schema, contract_id)
 
         # ── Statistical checks
         print("[runner] Running statistical checks ...")
-        all_results += check_range(df, schema)
+        all_results += check_range(df, schema, contract_id)
 
         baselines_path = Path(args.baselines)
         baselines = load_baselines(baselines_path)
-        drift_results, updated_baselines = run_statistical_drift_checks(df, schema, baselines)
+        drift_results, updated_baselines = run_statistical_drift_checks(
+            df, schema, baselines, contract_id
+        )
         all_results += drift_results
         save_baselines(updated_baselines, baselines_path)
         print(f"[runner] Baselines saved to {baselines_path}")
     else:
         snap = "error"
 
-    # ── Build report
-    report = build_report(all_results, contract_id, snap, args.data)
+    report = build_report(all_results, contract_id, snap, args.data, args.mode)
 
-    # ── Write output
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w") as f:
@@ -606,22 +647,34 @@ def main() -> None:
     # ── Summary
     print(f"\n[runner] ── Validation Report ──────────────────────────")
     print(f"[runner] Contract : {contract_id}")
+    print(f"[runner] Mode     : {args.mode}")
     print(f"[runner] Checks   : {report['total_checks']}")
     print(f"[runner] PASS     : {report['passed']}")
-    print(f"[runner] WARN     : {report['warned']}")
-    print(f"[runner] FAIL     : {report['failed']}")
+    print(f"[runner] HIGH     : {report['high']}")
     print(f"[runner] CRITICAL : {report['critical']}")
+    print(f"[runner] WARN/MED : {report['warned']}")
     print(f"[runner] ERROR    : {report['errored']}")
     print(f"[runner] Report   : {output_path}")
 
-    # Print any non-PASS results for immediate visibility
-    non_pass = [r for r in all_results if r["status"] != "PASS"]
+    non_pass = [r for r in all_results if r["status"] not in ("PASS",)]
     if non_pass:
         print(f"\n[runner] ── Issues Found ───────────────────────────────")
         for r in non_pass:
             print(f"  [{r['status']}] {r['check_id']}: {r['message']}")
     else:
         print("[runner] All checks passed.")
+
+    # ── Enforcement gate
+    blocked = should_block(report, args.mode)
+    if blocked:
+        print(
+            f"\n[runner] ██ PIPELINE BLOCKED ██  mode={args.mode}  "
+            f"critical={report['critical']}  high={report['high']}"
+        )
+        print("[runner] Fix violations before re-running in this mode.")
+        sys.exit(1)
+    elif args.mode != "AUDIT":
+        print(f"\n[runner] Pipeline PASSED enforcement gate (mode={args.mode}).")
 
 
 if __name__ == "__main__":
