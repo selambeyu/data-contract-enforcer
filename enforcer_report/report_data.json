@@ -1,0 +1,140 @@
+{
+  "generated_at": "2026-04-04T12:00:25.365135+00:00",
+  "llm_backend": "ollama",
+  "data_health_score": 100,
+  "health_grade": "A",
+  "health_narrative": "Our data quality report shows that our data is in excellent condition, with a perfect score of 100/100. This means that all checks have been successfully run across four key systems, resulting in no critical or high-level issues being detected. With this strong foundation, we can confidently move forward with new projects and changes without worrying about the integrity of our data.",
+  "violations_this_week": {
+    "critical_count": 0,
+    "high_count": 2,
+    "total_logged": 6,
+    "plain_english": [
+      "[HIGH] A critical data quality issue has been found in our document-refinery-extractions system, where a range of fact-confidence values exceeded the contract maximum, affecting 25,230 records and potentially impacting downstream systems such as cartographer, event-sourcing-platform, and AI-extensions.",
+      "[HIGH] A critical data quality issue has been identified where a key statistical measure of document refinement accuracy has drifted significantly from its baseline, which could impact downstream systems that rely on this data for decision-making and potentially cause errors or incorrect results.",
+      "[CRITICAL] The 'event_type' column in the week5-event-sourcing-platform-events table contains 50 records that don't match the expected enum values, which could cause issues with downstream systems like week7-enforcer and affect pipeline performance."
+    ]
+  },
+  "schema_changes_detected": {
+    "total_diffs_run": 4,
+    "breaking_changes": 0,
+    "summaries": [
+      {
+        "contract_id": "langsmith-trace-runs",
+        "verdict": "COMPATIBLE",
+        "breaking": 0,
+        "compatible": 0,
+        "action_required": "No action required."
+      },
+      {
+        "contract_id": "week3-document-refinery-extractions",
+        "verdict": "COMPATIBLE",
+        "breaking": 0,
+        "compatible": 0,
+        "action_required": "No action required."
+      },
+      {
+        "contract_id": "week4-brownfield-cartographer-lineage",
+        "verdict": "COMPATIBLE",
+        "breaking": 0,
+        "compatible": 1,
+        "action_required": "No action required."
+      },
+      {
+        "contract_id": "week5-event-sourcing-platform-events",
+        "verdict": "COMPATIBLE",
+        "breaking": 0,
+        "compatible": 0,
+        "action_required": "No action required."
+      }
+    ]
+  },
+  "ai_system_risk_assessment": {
+    "embedding_drift": {
+      "status": "PASS",
+      "message": "Embedding drift score 0.0801 <= 0.25 (PASS \u2014 no significant drift). Method: tfidf_fallback."
+    },
+    "prompt_schema_validation": {
+      "status": "PASS",
+      "message": "All 50 extraction records conform to prompt input schema."
+    },
+    "llm_output_violation_rate": {
+      "status": "PASS",
+      "message": "LLM output schema violation rate: 0.00% (0/30 verdicts with overall_verdict outside {PASS, FAIL, WARN}). Trend: unknown."
+    }
+  },
+  "top_recommendations": [
+    "Update the producer to output values within the contract bounds for 'week5-event-sourcing-platform-events.event_type.enum_conformance', specifically by ensuring that all event types are one of the defined enum values.",
+    "Run ValidationRunner in ENFORCE mode for production deployments of 'week4-brownfield-cartographer-lineage' and validate that at least 95% of node_node_id values conform to the expected UUID pattern.",
+    "Investigate and rectify the statistical drift issue with 'fact_confidence' by re-running the baseline calculation and updating the producer to output confidence scores within the validated range."
+  ],
+  "score_deductions": [],
+  "contract_summary_table": [
+    {
+      "contract_id": "langsmith-trace-runs",
+      "total_checks": 34,
+      "passed": 34,
+      "high": "\u2014",
+      "critical": 0,
+      "schema_breaking": 0,
+      "schema_compatible": 0,
+      "subscriber_count": 1,
+      "tier1_subscribers": 0,
+      "tier3_subscribers": 1,
+      "enforce_mode_subs": 0,
+      "requires_version_bump": false,
+      "enforcement_mode": "AUDIT"
+    },
+    {
+      "contract_id": "week3-document-refinery-extractions",
+      "total_checks": 29,
+      "passed": 29,
+      "high": 0,
+      "critical": 0,
+      "schema_breaking": 0,
+      "schema_compatible": 0,
+      "subscriber_count": 3,
+      "tier1_subscribers": 3,
+      "tier3_subscribers": 0,
+      "enforce_mode_subs": 2,
+      "requires_version_bump": false,
+      "enforcement_mode": "AUDIT"
+    },
+    {
+      "contract_id": "week4-brownfield-cartographer-lineage",
+      "total_checks": 20,
+      "passed": 20,
+      "high": 0,
+      "critical": 0,
+      "schema_breaking": 0,
+      "schema_compatible": 1,
+      "subscriber_count": 1,
+      "tier1_subscribers": 1,
+      "tier3_subscribers": 0,
+      "enforce_mode_subs": 1,
+      "requires_version_bump": false,
+      "enforcement_mode": "AUDIT"
+    },
+    {
+      "contract_id": "week5-event-sourcing-platform-events",
+      "total_checks": 26,
+      "passed": 26,
+      "high": 0,
+      "critical": 0,
+      "schema_breaking": 0,
+      "schema_compatible": 0,
+      "subscriber_count": 1,
+      "tier1_subscribers": 1,
+      "tier3_subscribers": 0,
+      "enforce_mode_subs": 1,
+      "requires_version_bump": false,
+      "enforcement_mode": "AUDIT"
+    }
+  ],
+  "totals": {
+    "contracts_covered": 4,
+    "total_subscriptions": 6,
+    "total_checks_baseline": 227,
+    "total_violations_logged": 6,
+    "breaking_schema_changes": 0
+  }
+}

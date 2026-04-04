@@ -1,0 +1,35 @@
+{
+  "embedding_drift": {
+    "check": "embedding_drift",
+    "status": "PASS",
+    "drift_score": 0.0801,
+    "cosine_similarity": 0.9199,
+    "threshold": 0.25,
+    "embedding_method": "tfidf_fallback",
+    "baseline_docs": 11061,
+    "current_docs": 14169,
+    "sample_size": 200,
+    "message": "Embedding drift score 0.0801 <= 0.25 (PASS \u2014 no significant drift). Method: tfidf_fallback."
+  },
+  "prompt_schema_validation": {
+    "check": "prompt_schema_validation",
+    "status": "PASS",
+    "total_records": 50,
+    "violating_records": 0,
+    "violation_rate": 0.0,
+    "quarantine_path": null,
+    "violations_sample": [],
+    "message": "All 50 extraction records conform to prompt input schema."
+  },
+  "llm_output_violation_rate": {
+    "check": "llm_output_violation_rate",
+    "status": "PASS",
+    "total_outputs": 30,
+    "schema_violations": 0,
+    "violation_rate": 0.0,
+    "warn_threshold": 0.02,
+    "trend": "unknown",
+    "baseline_rate": null,
+    "message": "LLM output schema violation rate: 0.00% (0/30 verdicts with overall_verdict outside {PASS, FAIL, WARN}). Trend: unknown."
+  }
+}
