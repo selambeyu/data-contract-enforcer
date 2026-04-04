@@ -1,0 +1,35 @@
+{
+  "contract_id": "week4-brownfield-cartographer-lineage",
+  "diff_generated_at": "2026-04-04T11:59:52.640454+00:00",
+  "older_snapshot": "schema_snapshots/week4-brownfield-cartographer-lineage/20260404T064027Z.yaml",
+  "newer_snapshot": "schema_snapshots/week4-brownfield-cartographer-lineage/20260404T115824Z.yaml",
+  "older_captured_at": "2026-04-04T06:40:27.738223+00:00",
+  "newer_captured_at": "2026-04-04T11:58:24.126732+00:00",
+  "summary": {
+    "total_changes": 1,
+    "breaking": 0,
+    "compatible": 1,
+    "requires_version_bump": false,
+    "compatibility_verdict": "COMPATIBLE"
+  },
+  "changes": [
+    {
+      "field": "node_type",
+      "change_type": "enum_values_added",
+      "classification": "COMPATIBLE",
+      "added": [
+        "EXTERNAL",
+        "FILE",
+        "PIPELINE"
+      ],
+      "reason": "Adding enum values is compatible if consumers handle unknown values."
+    }
+  ],
+  "migration_checklist": [
+    "=== COMPATIBLE CHANGES \u2014 no consumer action required ===",
+    "  [\u2713] ENUM EXTENDED 'node_type': new values ['EXTERNAL', 'FILE', 'PIPELINE'] \u2014 consumers that handle unknown values are unaffected."
+  ],
+  "rollback_plan": [
+    "No breaking changes \u2014 rollback not required."
+  ]
+}

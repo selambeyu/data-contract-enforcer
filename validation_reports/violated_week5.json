@@ -1,9 +1,9 @@
 {
-  "report_id": "d5d6fae8-e898-4c16-b9d1-83d74044e288",
+  "report_id": "271e7e7d-75e4-4652-bf48-114832a0dce1",
   "contract_id": "week5-event-sourcing-platform-events",
-  "snapshot_id": "d3e486efe52b65ad9bd3dad70e95f0913eed26bd8e78819b012ea6a53b377ea1",
-  "data_path": "outputs/week5/events.jsonl",
-  "run_timestamp": "2026-04-04T11:59:29.318638+00:00",
+  "snapshot_id": "e7d77cb7c8cb15ee3111606a7f40a7bc36bb7a6514e3faabe3c1a93ca209d742",
+  "data_path": "outputs/week5/events_violated.jsonl",
+  "run_timestamp": "2026-04-04T11:59:42.426337+00:00",
   "enforcement_mode": "AUDIT",
   "total_checks": 26,
   "passed": 26,

@@ -1,18 +1,20 @@
 {
-  "report_id": "5cb925ec-613e-4295-99ff-7f9b0ce29d72",
+  "report_id": "c18fff39-d917-4ded-8763-0bc86d8b4ccb",
   "contract_id": "week4-brownfield-cartographer-lineage",
-  "snapshot_id": "df00d45560af8fea3f9f64c9248744b84e2ee866241531795dc2fe66d275a3e1",
+  "snapshot_id": "73c6d0069c4807ae16a31ce638b028f37e7822b27b0110b6d40c3fa602504671",
   "data_path": "outputs/week4/lineage_snapshots.jsonl",
-  "run_timestamp": "2026-04-01T08:09:44.538919+00:00",
+  "run_timestamp": "2026-04-04T11:59:22.968557+00:00",
+  "enforcement_mode": "AUDIT",
   "total_checks": 20,
-  "passed": 19,
-  "failed": 1,
+  "passed": 20,
+  "failed": 0,
   "warned": 0,
+  "high": 0,
   "critical": 0,
   "errored": 0,
   "results": [
     {
-      "check_id": "snapshot_id.required.no_nulls",
+      "check_id": "week4-brownfield-cartographer-lineage.snapshot_id.required.no_nulls",
       "column_name": "snapshot_id",
       "check_type": "required",
       "status": "PASS",
@@ -24,7 +26,7 @@
       "message": "Required field 'snapshot_id' has no nulls."
     },
     {
-      "check_id": "codebase_root.required.no_nulls",
+      "check_id": "week4-brownfield-cartographer-lineage.codebase_root.required.no_nulls",
       "column_name": "codebase_root",
       "check_type": "required",
       "status": "PASS",
@@ -36,7 +38,7 @@
       "message": "Required field 'codebase_root' has no nulls."
     },
     {
-      "check_id": "git_commit.required.no_nulls",
+      "check_id": "week4-brownfield-cartographer-lineage.git_commit.required.no_nulls",
       "column_name": "git_commit",
       "check_type": "required",
       "status": "PASS",
@@ -48,7 +50,7 @@
       "message": "Required field 'git_commit' has no nulls."
     },
     {
-      "check_id": "captured_at.required.no_nulls",
+      "check_id": "week4-brownfield-cartographer-lineage.captured_at.required.no_nulls",
       "column_name": "captured_at",
       "check_type": "required",
       "status": "PASS",
@@ -60,7 +62,7 @@
       "message": "Required field 'captured_at' has no nulls."
     },
     {
-      "check_id": "node_node_id.required.no_nulls",
+      "check_id": "week4-brownfield-cartographer-lineage.node_node_id.required.no_nulls",
       "column_name": "node_node_id",
       "check_type": "required",
       "status": "PASS",
@@ -72,7 +74,7 @@
       "message": "Required field 'node_node_id' has no nulls."
     },
     {
-      "check_id": "node_type.required.no_nulls",
+      "check_id": "week4-brownfield-cartographer-lineage.node_type.required.no_nulls",
       "column_name": "node_type",
       "check_type": "required",
       "status": "PASS",
@@ -84,7 +86,7 @@
       "message": "Required field 'node_type' has no nulls."
     },
     {
-      "check_id": "node_label.required.no_nulls",
+      "check_id": "week4-brownfield-cartographer-lineage.node_label.required.no_nulls",
       "column_name": "node_label",
       "check_type": "required",
       "status": "PASS",
@@ -96,7 +98,7 @@
       "message": "Required field 'node_label' has no nulls."
     },
     {
-      "check_id": "snapshot_id.type_match",
+      "check_id": "week4-brownfield-cartographer-lineage.snapshot_id.type_match",
       "column_name": "snapshot_id",
       "check_type": "type",
       "status": "PASS",
@@ -108,7 +110,7 @@
       "message": "Column 'snapshot_id' dtype matches contract type 'string'."
     },
     {
-      "check_id": "codebase_root.type_match",
+      "check_id": "week4-brownfield-cartographer-lineage.codebase_root.type_match",
       "column_name": "codebase_root",
       "check_type": "type",
       "status": "PASS",
@@ -120,7 +122,7 @@
       "message": "Column 'codebase_root' dtype matches contract type 'string'."
     },
     {
-      "check_id": "git_commit.type_match",
+      "check_id": "week4-brownfield-cartographer-lineage.git_commit.type_match",
       "column_name": "git_commit",
       "check_type": "type",
       "status": "PASS",
@@ -132,7 +134,7 @@
       "message": "Column 'git_commit' dtype matches contract type 'string'."
     },
     {
-      "check_id": "captured_at.type_match",
+      "check_id": "week4-brownfield-cartographer-lineage.captured_at.type_match",
       "column_name": "captured_at",
       "check_type": "type",
       "status": "PASS",
@@ -144,7 +146,7 @@
       "message": "Column 'captured_at' dtype matches contract type 'string'."
     },
     {
-      "check_id": "node_node_id.type_match",
+      "check_id": "week4-brownfield-cartographer-lineage.node_node_id.type_match",
       "column_name": "node_node_id",
       "check_type": "type",
       "status": "PASS",
@@ -156,7 +158,7 @@
       "message": "Column 'node_node_id' dtype matches contract type 'string'."
     },
     {
-      "check_id": "node_type.type_match",
+      "check_id": "week4-brownfield-cartographer-lineage.node_type.type_match",
       "column_name": "node_type",
       "check_type": "type",
       "status": "PASS",
@@ -168,7 +170,7 @@
       "message": "Column 'node_type' dtype matches contract type 'string'."
     },
     {
-      "check_id": "node_label.type_match",
+      "check_id": "week4-brownfield-cartographer-lineage.node_label.type_match",
       "column_name": "node_label",
       "check_type": "type",
       "status": "PASS",
@@ -180,79 +182,73 @@
       "message": "Column 'node_label' dtype matches contract type 'string'."
     },
     {
-      "check_id": "codebase_root.enum_conformance",
+      "check_id": "week4-brownfield-cartographer-lineage.codebase_root.enum_conformance",
       "column_name": "codebase_root",
       "check_type": "enum",
       "status": "PASS",
       "actual_value": "all values conforming",
       "expected": "all values in ['/Users/melkam/Documents/10 Academy/Week4/ol-data-platform']",
-      "severity": "FAIL",
+      "severity": "CRITICAL",
       "records_failing": 0,
       "sample_failing": [],
       "message": "Column 'codebase_root' all values within enum."
     },
     {
-      "check_id": "git_commit.enum_conformance",
+      "check_id": "week4-brownfield-cartographer-lineage.git_commit.enum_conformance",
       "column_name": "git_commit",
       "check_type": "enum",
       "status": "PASS",
       "actual_value": "all values conforming",
       "expected": "all values in ['9d2b8c259f065d911fd426bc60c77dcfa454fcbb']",
-      "severity": "FAIL",
+      "severity": "CRITICAL",
       "records_failing": 0,
       "sample_failing": [],
       "message": "Column 'git_commit' all values within enum."
     },
     {
-      "check_id": "node_type.enum_conformance",
+      "check_id": "week4-brownfield-cartographer-lineage.node_type.enum_conformance",
       "column_name": "node_type",
       "check_type": "enum",
       "status": "PASS",
       "actual_value": "all values conforming",
-      "expected": "all values in ['MODEL', 'TABLE']",
-      "severity": "FAIL",
+      "expected": "all values in ['EXTERNAL', 'FILE', 'MODEL', 'PIPELINE', 'TABLE']",
+      "severity": "CRITICAL",
       "records_failing": 0,
       "sample_failing": [],
       "message": "Column 'node_type' all values within enum."
     },
     {
-      "check_id": "snapshot_id.uuid_pattern",
+      "check_id": "week4-brownfield-cartographer-lineage.snapshot_id.uuid_pattern",
       "column_name": "snapshot_id",
       "check_type": "uuid_pattern",
       "status": "PASS",
       "actual_value": "all values match UUID pattern",
       "expected": "UUID format",
-      "severity": "FAIL",
+      "severity": "CRITICAL",
       "records_failing": 0,
       "sample_failing": [],
       "message": "Column 'snapshot_id' all values are valid UUIDs."
     },
     {
-      "check_id": "node_node_id.uuid_pattern",
+      "check_id": "week4-brownfield-cartographer-lineage.node_node_id.uuid_pattern",
       "column_name": "node_node_id",
       "check_type": "uuid_pattern",
-      "status": "FAIL",
-      "actual_value": "2307 values fail UUID regex",
-      "expected": "all values match ^[0-9a-f]{8}-...-[0-9a-f]{12}$",
-      "severity": "FAIL",
-      "records_failing": 2307,
-      "sample_failing": [
-        "transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/bin/dbt-local-dev.py:181",
-        "dataset:__unresolved__/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/bin/dbt-local-dev.py:181:181",
-        "transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/bin/dbt-local-dev.py:471",
-        "dataset:__unresolved__/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/bin/dbt-local-dev.py:471:471",
-        "transformation:/Users/melkam/Documents/10 Academy/Week4/ol-data-platform/bin/dbt-local-dev.py:745"
-      ],
-      "message": "Column 'node_node_id' has 2307 values that are not valid UUIDs."
+      "status": "PASS",
+      "actual_value": "all values match UUID pattern",
+      "expected": "UUID format",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "Column 'node_node_id' all values are valid UUIDs."
     },
     {
-      "check_id": "captured_at.datetime_format",
+      "check_id": "week4-brownfield-cartographer-lineage.captured_at.datetime_format",
       "column_name": "captured_at",
       "check_type": "datetime_format",
       "status": "PASS",
       "actual_value": "all values parse as ISO 8601",
       "expected": "ISO 8601 date-time",
-      "severity": "FAIL",
+      "severity": "CRITICAL",
       "records_failing": 0,
       "sample_failing": [],
       "message": "Column 'captured_at' all values are valid ISO 8601 datetimes."

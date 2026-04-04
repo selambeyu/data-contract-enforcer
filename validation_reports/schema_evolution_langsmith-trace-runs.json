@@ -1,0 +1,20 @@
+{
+  "contract_id": "langsmith-trace-runs",
+  "diff_generated_at": "2026-04-04T11:59:52.613473+00:00",
+  "older_snapshot": "schema_snapshots/langsmith-trace-runs/20260404T064028Z.yaml",
+  "newer_snapshot": "schema_snapshots/langsmith-trace-runs/20260404T115915Z.yaml",
+  "older_captured_at": "2026-04-04T06:40:28.293448+00:00",
+  "newer_captured_at": "2026-04-04T11:59:15.373162+00:00",
+  "summary": {
+    "total_changes": 0,
+    "breaking": 0,
+    "compatible": 0,
+    "requires_version_bump": false,
+    "compatibility_verdict": "COMPATIBLE"
+  },
+  "changes": [],
+  "migration_checklist": [],
+  "rollback_plan": [
+    "No breaking changes \u2014 rollback not required."
+  ]
+}
