@@ -1,0 +1,94 @@
+contract_id: week5-event-sourcing-platform-events
+snapshot_version: 20260404T114831Z
+captured_at: '2026-04-04T11:48:31.181349+00:00'
+schema:
+  event_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  event_type:
+    type: string
+    required: true
+    llm_annotations:
+      description: The event type indicates the specific action taken in an application
+        session.
+      business_rule: The event type must be one of the predefined values to ensure
+        consistency and accuracy.
+      cross_column_note: No dependency on adjacent columns.
+      annotated_by: llm
+    description: The event type indicates the specific action taken in an application
+      session.
+  aggregate_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  aggregate_type:
+    type: string
+    required: true
+    enum:
+    - AgentSession
+    - ComplianceRecord
+    - DocumentPackage
+    - LoanApplication
+    llm_annotations:
+      description: The aggregate type indicates the type of event being processed.
+      business_rule: The value must be one of the specified event types.
+      cross_column_note: No dependency on adjacent columns.
+      annotated_by: llm
+    description: The aggregate type indicates the type of event being processed.
+  sequence_number:
+    type: integer
+    required: true
+    minimum: 0
+    llm_annotations:
+      description: A unique identifier for each event in the platform
+      business_rule: The sequence number must be a positive integer
+      cross_column_note: Sequence numbers are not dependent on adjacent columns
+      annotated_by: llm
+    description: A unique identifier for each event in the platform
+  schema_version:
+    type: string
+    required: true
+    enum:
+    - 1.0.0
+    - 2.0.0
+    llm_annotations:
+      description: The schema version indicates the current version of the event data
+      business_rule: The value must be in the format X.X.X where X is a valid semantic
+        version number
+      cross_column_note: No dependency on adjacent columns
+      annotated_by: llm
+    description: The schema version indicates the current version of the event data
+  occurred_at:
+    type: string
+    required: true
+    format: date-time
+    description: ISO 8601 datetime string.
+  recorded_at:
+    type: string
+    required: true
+    format: date-time
+    description: ISO 8601 datetime string.
+  payload:
+    type: string
+    required: false
+    llm_annotations:
+      description: A payload containing financial facts extracted from documents
+      business_rule: The payload must contain non-null values for all required fields
+      cross_column_note: No dependency on adjacent columns
+      annotated_by: llm
+    description: A payload containing financial facts extracted from documents
+  metadata:
+    type: string
+    required: false
+    llm_annotations:
+      description: A unique identifier for the event, which can be either a user ID
+        or a causation ID.
+      business_rule: The metadata must contain either a user ID or a causation ID,
+        but not both.
+      cross_column_note: No dependency on adjacent columns.
+      annotated_by: llm
+    description: A unique identifier for the event, which can be either a user ID
+      or a causation ID.

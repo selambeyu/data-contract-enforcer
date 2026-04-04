@@ -1,0 +1,84 @@
+contract_id: week3-document-refinery-extractions
+snapshot_version: 20260404T114749Z
+captured_at: '2026-04-04T11:47:49.071401+00:00'
+schema:
+  doc_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  source_path:
+    type: string
+    required: true
+    llm_annotations:
+      description: The source path of the document file.
+      business_rule: The source path must be a non-empty string and should contain
+        a valid file extension.
+      cross_column_note: Dependent on doc_id for identifying unique documents.
+      annotated_by: llm
+    description: The source path of the document file.
+  source_hash:
+    type: string
+    required: true
+  extraction_model:
+    type: string
+    required: true
+    enum:
+    - docling-layout-v1
+    - layout-v1
+    - layout-vision-fallback-v1
+    - vision-ocr-v1
+    - vision-v1
+    llm_annotations:
+      description: A unique identifier for the extraction model used in document refinement.
+      business_rule: The value must be a valid UUID.
+      cross_column_note: None
+      annotated_by: llm
+    description: A unique identifier for the extraction model used in document refinement.
+  processing_time_ms:
+    type: integer
+    required: true
+    minimum: 0
+    llm_annotations:
+      description: The processing time in milliseconds for document extraction.
+      business_rule: Values must be non-negative integers.
+      cross_column_note: Dependent on source_path and extraction_model.
+      annotated_by: llm
+    description: The processing time in milliseconds for document extraction.
+  extracted_at:
+    type: string
+    required: true
+    format: date-time
+    description: ISO 8601 datetime string.
+  fact_fact_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  fact_text:
+    type: string
+    required: true
+    llm_annotations:
+      description: Text extracted from financial statements
+      business_rule: Values must be in the format of synthetic block X of Y from Z_Audited_Financial_Statement_Report
+      cross_column_note: Dependent on fact_fact_id for data lineage and fact_confidence
+        for relevance
+      annotated_by: llm
+    description: Text extracted from financial statements
+  fact_confidence:
+    type: number
+    required: true
+    minimum: 0.0
+    maximum: 1.0
+    description: Confidence score. Must remain 0.0–1.0 float. BREAKING CHANGE if changed
+      to 0–100 integer percentage.
+  fact_page_ref:
+    type: number
+    required: false
+    minimum: 0
+    llm_annotations:
+      description: A unique identifier for each fact page.
+      business_rule: The value must be a valid integer greater than 0.
+      cross_column_note: Cannot be null and is dependent on the values of fact_fact_id.
+      annotated_by: llm
+    description: A unique identifier for each fact page.

@@ -1,0 +1,51 @@
+contract_id: week5-event-sourcing-platform-events
+snapshot_version: 20260404T064116Z
+captured_at: '2026-04-04T06:41:16.312645+00:00'
+schema:
+  event_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  event_type:
+    type: string
+    required: true
+  aggregate_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  aggregate_type:
+    type: string
+    required: true
+    enum:
+    - AgentSession
+    - ComplianceRecord
+    - DocumentPackage
+    - LoanApplication
+  sequence_number:
+    type: integer
+    required: true
+    minimum: 0
+  schema_version:
+    type: string
+    required: true
+    enum:
+    - 1.0.0
+    - 2.0.0
+  occurred_at:
+    type: string
+    required: true
+    format: date-time
+    description: ISO 8601 datetime string.
+  recorded_at:
+    type: string
+    required: true
+    format: date-time
+    description: ISO 8601 datetime string.
+  payload:
+    type: string
+    required: false
+  metadata:
+    type: string
+    required: false

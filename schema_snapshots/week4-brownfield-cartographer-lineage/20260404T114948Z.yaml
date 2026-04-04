@@ -1,0 +1,71 @@
+contract_id: week4-brownfield-cartographer-lineage
+snapshot_version: 20260404T114948Z
+captured_at: '2026-04-04T11:49:48.045027+00:00'
+schema:
+  snapshot_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  codebase_root:
+    type: string
+    required: true
+    enum:
+    - /Users/melkam/Documents/10 Academy/Week4/ol-data-platform
+    llm_annotations:
+      description: The codebase root is the path to the repository where data was
+        captured.
+      business_rule: The codebase root must be a non-empty string and cannot exceed
+        255 characters.
+      cross_column_note: The codebase root depends on the snapshot_id for its validity.
+      annotated_by: llm
+    description: The codebase root is the path to the repository where data was captured.
+  git_commit:
+    type: string
+    required: true
+    enum:
+    - 9d2b8c259f065d911fd426bc60c77dcfa454fcbb
+    llm_annotations:
+      description: The git_commit field contains the commit hash of the code changes
+        made to the cartographer lineage.
+      business_rule: The commit hash must be in the format XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXXXXXX
+      cross_column_note: The git_commit value depends on the snapshot_id and node_node_id
+        columns.
+      annotated_by: llm
+    description: The git_commit field contains the commit hash of the code changes
+      made to the cartographer lineage.
+  captured_at:
+    type: string
+    required: true
+    format: date-time
+    description: ISO 8601 datetime string.
+  node_node_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  node_type:
+    type: string
+    required: true
+    enum:
+    - MODEL
+    - TABLE
+    llm_annotations:
+      description: The node type indicates the source of data for a cartographer lineage
+        entry.
+      business_rule: Node types must be either MODEL or TABLE.
+      cross_column_note: Node type depends on git_commit and captured_at.
+      annotated_by: llm
+    description: The node type indicates the source of data for a cartographer lineage
+      entry.
+  node_label:
+    type: string
+    required: true
+    llm_annotations:
+      description: A unique identifier for each node in the lineage graph.
+      business_rule: The value must be a string that can be matched against a pattern
+        of dbt script file paths and line numbers.
+      cross_column_note: This field depends on the values in the adjacent 'captured_at'
+        column to determine its format.
+      annotated_by: llm
+    description: A unique identifier for each node in the lineage graph.
