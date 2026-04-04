@@ -1,0 +1,37 @@
+{
+  "contract_id": "week5-event-sourcing-platform-events",
+  "diff_generated_at": "2026-04-03T19:57:37.660121+00:00",
+  "v1_snapshot": "schema_snapshots/v1/week5-event-sourcing-platform-events.json",
+  "v2_snapshot": "schema_snapshots/v2/week5-event-sourcing-platform-events.json",
+  "summary": {
+    "total_changes": 2,
+    "breaking": 1,
+    "compatible": 1,
+    "requires_version_bump": true
+  },
+  "changes": [
+    {
+      "field": "event_type",
+      "change_type": "field_removed",
+      "classification": "BREAKING",
+      "was_required": true,
+      "was_type": "string",
+      "reason": "Removing a field breaks all consumers that read it."
+    },
+    {
+      "field": "_new_optional_field",
+      "change_type": "field_added",
+      "classification": "COMPATIBLE",
+      "required": false,
+      "type": "string",
+      "reason": "Adding an optional field is backwards-compatible."
+    }
+  ],
+  "migration_checklist": [
+    "=== BREAKING CHANGES \u2014 require version bump and consumer migration ===",
+    "  [ ] REMOVE field 'event_type': notify all consumers to stop reading this field.",
+    "",
+    "=== COMPATIBLE CHANGES \u2014 no consumer action required ===",
+    "  [\u2713] NEW optional field '_new_optional_field' (string) \u2014 consumers may adopt at leisure."
+  ]
+}

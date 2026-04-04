@@ -1,12 +1,13 @@
 {
   "contract_id": "week5-event-sourcing-platform-events",
-  "diff_generated_at": "2026-04-04T11:59:52.654035+00:00",
+  "diff_generated_at": "2026-04-04T18:43:38.303258+00:00",
   "older_snapshot": "schema_snapshots/week5-event-sourcing-platform-events/20260404T064028Z.yaml",
   "newer_snapshot": "schema_snapshots/week5-event-sourcing-platform-events/20260404T115849Z.yaml",
   "older_captured_at": "2026-04-04T06:40:28.035512+00:00",
   "newer_captured_at": "2026-04-04T11:58:49.539675+00:00",
   "summary": {
     "total_changes": 0,
+    "critical": 0,
     "breaking": 0,
     "compatible": 0,
     "requires_version_bump": false,

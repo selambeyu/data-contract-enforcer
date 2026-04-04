@@ -2,10 +2,17 @@
 SchemaEvolutionAnalyzer — Phase 3 (producer-side CI gate).
 
 Diffs consecutive timestamped schema snapshots and classifies each change as:
-  BREAKING  — consumers will fail (field removed, type narrowed, required added,
-               enum value removed, format/pattern added to existing field)
+  CRITICAL  — high-severity breaking that silently corrupts downstream logic
+               (e.g. float 0.0–1.0 → int 0–100 scale mutation, field renamed
+               while old name still accepted by consumers)
+  BREAKING  — consumers will fail loudly (field removed, type narrowed,
+               required added, enum value removed, format/pattern added)
   COMPATIBLE — consumers are unaffected (optional field added, enum extended,
                range widened, description changed)
+
+Per-consumer failure mode analysis is injected from the contract registry
+(contract_registry/subscriptions.yaml) so each change record includes the
+exact subscribers that will break and the mechanism of failure.
 
 The SchemaEvolutionAnalyzer runs on the PRODUCER side as a pre-emptive CI gate.
 It catches breaking changes BEFORE they ship to consumers.
@@ -33,6 +40,147 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+
+
+# ── Registry loader ───────────────────────────────────────────────────────────
+
+def load_registry(registry_path: Path = Path("contract_registry/subscriptions.yaml")) -> dict:
+    """
+    Load contract_registry/subscriptions.yaml and return a lookup dict:
+      { contract_id: [subscription_dict, ...] }
+    Each subscription carries fields_consumed, breaking_fields, validation_mode, tier, contact.
+    """
+    if not registry_path.exists():
+        return {}
+    with open(registry_path) as f:
+        raw = yaml.safe_load(f)
+    result: dict[str, list[dict]] = {}
+    for sub in raw.get("subscriptions", []):
+        cid = sub.get("contract_id", "")
+        result.setdefault(cid, []).append(sub)
+    return result
+
+
+def _consumer_impact(
+    field: str,
+    change_type: str,
+    registry: dict,
+    contract_id: str,
+) -> list[dict]:
+    """
+    For a given field change on contract_id, return a list of per-subscriber
+    impact records. Each record includes the subscriber_id, why the field is
+    breaking for that subscriber, the validation_mode, and the tier.
+
+    Only subscribers that have explicitly registered this field in their
+    breaking_fields list are included. Others are noted as 'unverified risk'.
+    """
+    impacts = []
+    for sub in registry.get(contract_id, []):
+        sub_id = sub.get("subscriber_id", "")
+        mode   = sub.get("validation_mode", "AUDIT")
+        tier   = sub.get("tier", 1)
+        contact = sub.get("contact", "")
+
+        # Check if this field is in breaking_fields
+        reason = None
+        for bf in sub.get("breaking_fields", []):
+            bf_field = bf.get("field", "") if isinstance(bf, dict) else bf
+            # Match exact or prefix (e.g. extracted_facts.confidence matches extracted_facts)
+            if bf_field == field or field.startswith(bf_field + ".") or bf_field.startswith(field + "."):
+                reason = bf.get("reason", "") if isinstance(bf, dict) else ""
+                break
+
+        if reason is not None:
+            impacts.append({
+                "subscriber_id":  sub_id,
+                "tier":           tier,
+                "validation_mode": mode,
+                "contact":        contact,
+                "failure_mechanism": reason,
+                "will_block_pipeline": mode == "ENFORCE",
+            })
+        else:
+            # Subscriber consumes this field but hasn't declared it breaking
+            if field in sub.get("fields_consumed", []):
+                impacts.append({
+                    "subscriber_id":  sub_id,
+                    "tier":           tier,
+                    "validation_mode": mode,
+                    "contact":        contact,
+                    "failure_mechanism": f"Field '{field}' is consumed but not declared in breaking_fields — unverified risk.",
+                    "will_block_pipeline": False,
+                })
+    return impacts
+
+
+# ── CRITICAL narrow-type detection ────────────────────────────────────────────
+
+# Pairs where the transition is CRITICAL (not just BREAKING) because the scale
+# change produces values that are syntactically valid but semantically corrupt.
+# Format: (old_type, new_type) and/or constraint patterns that signal the change.
+_CRITICAL_TYPE_TRANSITIONS = {
+    # Float probability/score narrowed to integer percentage
+    ("float64", "int64"),
+    ("float",   "int"),
+    ("float64", "int"),
+    ("float",   "int64"),
+    ("number",  "integer"),
+}
+
+# If a float field's maximum changes from a value ≤ 1.0 to a value > 1.0,
+# that is a CRITICAL scale mutation (0.0–1.0 → 0–100 pattern).
+def _is_critical_scale_mutation(old_clause: dict, new_clause: dict) -> tuple[bool, str]:
+    """
+    Detect the float 0.0–1.0 → int 0–100 scale mutation and similar patterns.
+    Returns (is_critical, explanation).
+
+    This is CRITICAL (not just BREAKING) because:
+    - The values are still numeric — no type error is raised
+    - All consumers silently receive out-of-range values
+    - Threshold comparisons (e.g. confidence >= 0.5) invert their behaviour
+    - Statistical baselines are poisoned before anyone notices
+    """
+    old_max = old_clause.get("maximum")
+    new_max = new_clause.get("maximum")
+    old_min = old_clause.get("minimum", 0)
+    new_min = new_clause.get("minimum", 0)
+    old_type = str(old_clause.get("type", "")).lower()
+    new_type = str(new_clause.get("type", "")).lower()
+
+    # Case 1: explicit type change float → int on a bounded 0–1 field
+    if (old_type, new_type) in _CRITICAL_TYPE_TRANSITIONS:
+        if old_max is not None and float(old_max) <= 1.0:
+            return True, (
+                f"CRITICAL scale mutation: type changed {old_type} → {new_type} on a field "
+                f"with maximum={old_max}. This is the 0.0–1.0 → 0–100 pattern. "
+                f"All threshold comparisons on this field will silently invert."
+            )
+
+    # Case 2: maximum changes from ≤ 1.0 to > 1.0 (scale expanded regardless of type)
+    if old_max is not None and new_max is not None:
+        old_max_f = float(old_max)
+        new_max_f = float(new_max)
+        if old_max_f <= 1.0 and new_max_f > 1.0:
+            scale_factor = new_max_f / old_max_f if old_max_f > 0 else None
+            factor_str = f" (×{scale_factor:.0f} scale change)" if scale_factor and scale_factor >= 10 else ""
+            return True, (
+                f"CRITICAL scale mutation: maximum changed from {old_max} → {new_max}{factor_str}. "
+                f"Field was in 0.0–{old_max} range; now in 0–{new_max:.0f} range. "
+                f"Any consumer applying a threshold in the old scale will silently pass or fail all records."
+            )
+
+    # Case 3: minimum changes from 0.0 to a large positive value suggesting unit change
+    if old_min is not None and new_min is not None:
+        old_min_f = float(old_min)
+        new_min_f = float(new_min)
+        if old_min_f == 0.0 and new_min_f >= 10.0 and old_max is not None and float(old_max) <= 1.0:
+            return True, (
+                f"CRITICAL scale mutation: minimum changed from {old_min} → {new_min} "
+                f"while field had maximum={old_max}. Values now outside the original range by ≥10×."
+            )
+
+    return False, ""
 
 
 # ── Snapshot discovery ─────────────────────────────────────────────────────────
@@ -133,27 +281,64 @@ def _parse_since(since_str: str) -> datetime:
 
 # ── Change classification ──────────────────────────────────────────────────────
 
-def _classify_field_change(old_clause: dict, new_clause: dict, field: str) -> list[dict]:
-    """Return classified change records for a modified field."""
+def _classify_field_change(
+    old_clause: dict,
+    new_clause: dict,
+    field: str,
+    registry: dict | None = None,
+    contract_id: str = "",
+) -> list[dict]:
+    """Return classified change records for a modified field.
+
+    Each change record now carries a 'consumer_impact' list describing
+    per-subscriber failure modes, sourced from the contract registry.
+    Changes that represent the float 0.0–1.0 → int 0–100 scale mutation
+    are escalated to CRITICAL (above BREAKING) regardless of type.
+    """
     changes = []
+    registry = registry or {}
+
+    def _with_impact(change: dict) -> dict:
+        """Attach per-consumer impact analysis to a change record."""
+        change["consumer_impact"] = _consumer_impact(
+            field, change.get("change_type", ""), registry, contract_id
+        )
+        return change
+
+    # ── CRITICAL: scale mutation check (must run before generic type_changed) ──
+    is_critical, critical_reason = _is_critical_scale_mutation(old_clause, new_clause)
+    if is_critical:
+        changes.append(_with_impact({
+            "field": field,
+            "change_type": "scale_mutation",
+            "classification": "CRITICAL",
+            "old_maximum": old_clause.get("maximum"),
+            "new_maximum": new_clause.get("maximum"),
+            "old_type": old_clause.get("type"),
+            "new_type": new_clause.get("type"),
+            "reason": critical_reason,
+        }))
+        # Return immediately — the CRITICAL record supersedes the generic type_changed
+        # and range_changed records for this field. Avoids double-reporting.
+        return changes
 
     # Type change
     if old_clause.get("type") != new_clause.get("type"):
-        changes.append({
+        changes.append(_with_impact({
             "field": field,
             "change_type": "type_changed",
             "classification": "BREAKING",
             "old": old_clause.get("type"),
             "new": new_clause.get("type"),
             "reason": "Type change breaks all consumers that parse this field.",
-        })
+        }))
 
     # required: False→True = BREAKING, True→False = COMPATIBLE
     old_req = old_clause.get("required", False)
     new_req = new_clause.get("required", False)
     if old_req != new_req:
         classification = "BREAKING" if (not old_req and new_req) else "COMPATIBLE"
-        changes.append({
+        changes.append(_with_impact({
             "field": field,
             "change_type": "required_changed",
             "classification": classification,
@@ -164,7 +349,7 @@ def _classify_field_change(old_clause: dict, new_clause: dict, field: str) -> li
                 if classification == "BREAKING"
                 else "Making a field optional is backwards-compatible."
             ),
-        })
+        }))
 
     # Enum changes
     old_enum = set(old_clause.get("enum", []))
@@ -173,44 +358,44 @@ def _classify_field_change(old_clause: dict, new_clause: dict, field: str) -> li
         removed_values = old_enum - new_enum
         added_values   = new_enum - old_enum
         if removed_values:
-            changes.append({
+            changes.append(_with_impact({
                 "field": field,
                 "change_type": "enum_values_removed",
                 "classification": "BREAKING",
                 "removed": sorted(removed_values),
                 "reason": "Removing enum values breaks consumers that send/receive those values.",
-            })
+            }))
         if added_values:
-            changes.append({
+            changes.append(_with_impact({
                 "field": field,
                 "change_type": "enum_values_added",
                 "classification": "COMPATIBLE",
                 "added": sorted(added_values),
                 "reason": "Adding enum values is compatible if consumers handle unknown values.",
-            })
+            }))
     elif old_enum and not new_clause.get("enum"):
-        changes.append({
+        changes.append(_with_impact({
             "field": field,
             "change_type": "enum_removed",
             "classification": "BREAKING",
             "old_enum": sorted(old_enum),
             "reason": "Removing enum constraint drops validation guarantee for all consumers.",
-        })
+        }))
     elif not old_enum and new_clause.get("enum"):
-        changes.append({
+        changes.append(_with_impact({
             "field": field,
             "change_type": "enum_added",
             "classification": "BREAKING",
             "new_enum": sorted(new_clause.get("enum", [])),
             "reason": "Adding enum constraint to existing field breaks any values not in the enum.",
-        })
+        }))
 
     # format: added = BREAKING, removed = COMPATIBLE
     old_fmt = old_clause.get("format")
     new_fmt = new_clause.get("format")
     if old_fmt != new_fmt:
         classification = "BREAKING" if (not old_fmt and new_fmt) else "COMPATIBLE"
-        changes.append({
+        changes.append(_with_impact({
             "field": field,
             "change_type": "format_changed",
             "classification": classification,
@@ -221,66 +406,78 @@ def _classify_field_change(old_clause: dict, new_clause: dict, field: str) -> li
                 if classification == "BREAKING"
                 else "Removing a format constraint is generally compatible."
             ),
-        })
+        }))
 
     # minimum/maximum — narrowed = BREAKING, widened = COMPATIBLE
     for bound in ("minimum", "maximum"):
         old_val = old_clause.get(bound)
         new_val = new_clause.get(bound)
         if old_val is None and new_val is not None:
-            changes.append({
+            changes.append(_with_impact({
                 "field": field,
                 "change_type": f"{bound}_added",
                 "classification": "BREAKING",
                 "new": new_val,
                 "reason": f"Adding {bound} constraint breaks existing data outside that bound.",
-            })
+            }))
         elif old_val is not None and new_val is None:
-            changes.append({
+            changes.append(_with_impact({
                 "field": field,
                 "change_type": f"{bound}_removed",
                 "classification": "COMPATIBLE",
                 "old": old_val,
                 "reason": f"Removing {bound} constraint is backwards-compatible.",
-            })
+            }))
         elif old_val is not None and new_val is not None and old_val != new_val:
             if bound == "minimum":
                 classification = "BREAKING" if new_val > old_val else "COMPATIBLE"
             else:
                 classification = "BREAKING" if new_val < old_val else "COMPATIBLE"
-            changes.append({
+            changes.append(_with_impact({
                 "field": field,
                 "change_type": f"{bound}_changed",
                 "classification": classification,
                 "old": old_val,
                 "new": new_val,
                 "reason": f"{'Narrowing' if classification == 'BREAKING' else 'Widening'} {bound} range.",
-            })
+            }))
 
     return changes
 
 
-def diff_schemas(v1_schema: dict, v2_schema: dict) -> list[dict]:
-    """Diff two schema dicts, return classified change records."""
+def diff_schemas(
+    v1_schema: dict,
+    v2_schema: dict,
+    registry: dict | None = None,
+    contract_id: str = "",
+) -> list[dict]:
+    """Diff two schema dicts, return classified change records.
+
+    registry and contract_id are threaded through to _classify_field_change
+    so that per-consumer impact analysis is embedded in each change record.
+    """
     changes = []
+    registry = registry or {}
     v1_fields = set(v1_schema.keys())
     v2_fields = set(v2_schema.keys())
 
     for field in v1_fields - v2_fields:
         clause = v1_schema[field]
-        changes.append({
+        change = {
             "field": field,
             "change_type": "field_removed",
             "classification": "BREAKING",
             "was_required": clause.get("required", False),
             "was_type": clause.get("type"),
             "reason": "Removing a field breaks all consumers that read it.",
-        })
+            "consumer_impact": _consumer_impact(field, "field_removed", registry, contract_id),
+        }
+        changes.append(change)
 
     for field in v2_fields - v1_fields:
         clause = v2_schema[field]
         is_required = clause.get("required", False)
-        changes.append({
+        change = {
             "field": field,
             "change_type": "field_added",
             "classification": "BREAKING" if is_required else "COMPATIBLE",
@@ -291,13 +488,17 @@ def diff_schemas(v1_schema: dict, v2_schema: dict) -> list[dict]:
                 if is_required
                 else "Adding an optional field is backwards-compatible."
             ),
-        })
+            "consumer_impact": _consumer_impact(field, "field_added", registry, contract_id),
+        }
+        changes.append(change)
 
     for field in v1_fields & v2_fields:
         old_clause = v1_schema[field]
         new_clause = v2_schema[field]
         if old_clause != new_clause:
-            changes.extend(_classify_field_change(old_clause, new_clause, field))
+            changes.extend(_classify_field_change(
+                old_clause, new_clause, field, registry, contract_id
+            ))
 
     return changes
 
@@ -306,8 +507,24 @@ def diff_schemas(v1_schema: dict, v2_schema: dict) -> list[dict]:
 
 def build_migration_checklist(changes: list[dict]) -> list[str]:
     checklist = []
-    breaking  = [c for c in changes if c["classification"] == "BREAKING"]
+    critical   = [c for c in changes if c["classification"] == "CRITICAL"]
+    breaking   = [c for c in changes if c["classification"] == "BREAKING"]
     compatible = [c for c in changes if c["classification"] == "COMPATIBLE"]
+
+    if critical:
+        checklist.append("=== CRITICAL CHANGES — silent data corruption, immediate action required ===")
+        for c in critical:
+            field = c["field"]
+            ct    = c["change_type"]
+            checklist.append(f"  [!!!] CRITICAL {ct.upper()} '{field}':")
+            checklist.append(f"        {c.get('reason', '')}")
+            for impact in c.get("consumer_impact", []):
+                block_str = "WILL BLOCK pipeline" if impact.get("will_block_pipeline") else "will NOT block (AUDIT/WARN mode)"
+                checklist.append(
+                    f"        → {impact['subscriber_id']} (tier={impact['tier']}, mode={impact['validation_mode']}): "
+                    f"{impact['failure_mechanism']} [{block_str}]"
+                )
+        checklist.append("")
 
     if breaking:
         checklist.append("=== BREAKING CHANGES — require version bump and consumer migration ===")
@@ -345,6 +562,12 @@ def build_migration_checklist(changes: list[dict]) -> list[str]:
                 )
             else:
                 checklist.append(f"  [ ] {ct.upper()} '{field}': {c.get('reason','')}")
+            # Per-consumer impact lines for BREAKING changes
+            for impact in c.get("consumer_impact", []):
+                block_str = "WILL BLOCK" if impact.get("will_block_pipeline") else "audit-only"
+                checklist.append(
+                    f"        → {impact['subscriber_id']} ({block_str}): {impact['failure_mechanism']}"
+                )
         checklist.append("")
 
     if compatible:
@@ -404,16 +627,31 @@ def build_rollback_plan(changes: list[dict], contract_id: str) -> list[str]:
 
 # ── Diff runner ────────────────────────────────────────────────────────────────
 
-def diff_snapshots(older_path: Path, newer_path: Path, contract_id: str = "") -> dict:
+def diff_snapshots(
+    older_path: Path,
+    newer_path: Path,
+    contract_id: str = "",
+    registry_path: Path = Path("contract_registry/subscriptions.yaml"),
+) -> dict:
     older = load_snapshot(older_path)
     newer = load_snapshot(newer_path)
     cid = contract_id or older.get("contract_id", str(older_path.stem))
 
-    changes    = diff_schemas(older.get("schema", {}), newer.get("schema", {}))
+    registry  = load_registry(registry_path)
+    changes   = diff_schemas(older.get("schema", {}), newer.get("schema", {}), registry, cid)
+    critical   = [c for c in changes if c["classification"] == "CRITICAL"]
     breaking   = [c for c in changes if c["classification"] == "BREAKING"]
     compatible = [c for c in changes if c["classification"] == "COMPATIBLE"]
     checklist  = build_migration_checklist(changes)
     rollback   = build_rollback_plan(changes, cid)
+
+    # Verdict hierarchy: CRITICAL > BREAKING > COMPATIBLE
+    if critical:
+        verdict = "CRITICAL"
+    elif breaking:
+        verdict = "BREAKING"
+    else:
+        verdict = "COMPATIBLE"
 
     return {
         "contract_id":   cid,
@@ -423,11 +661,12 @@ def diff_snapshots(older_path: Path, newer_path: Path, contract_id: str = "") ->
         "older_captured_at": older.get("captured_at", ""),
         "newer_captured_at": newer.get("captured_at", ""),
         "summary": {
-            "total_changes":   len(changes),
-            "breaking":        len(breaking),
-            "compatible":      len(compatible),
-            "requires_version_bump": len(breaking) > 0,
-            "compatibility_verdict": "BREAKING" if breaking else "COMPATIBLE",
+            "total_changes":         len(changes),
+            "critical":              len(critical),
+            "breaking":              len(breaking),
+            "compatible":            len(compatible),
+            "requires_version_bump": len(breaking) > 0 or len(critical) > 0,
+            "compatibility_verdict": verdict,
         },
         "changes": changes,
         "migration_checklist": checklist,
@@ -438,11 +677,20 @@ def diff_snapshots(older_path: Path, newer_path: Path, contract_id: str = "") ->
 def print_diff_summary(result: dict) -> None:
     s      = result["summary"]
     cid    = result["contract_id"]
-    verdict = "⚠️  BREAKING — version bump required" if s["requires_version_bump"] else "✓ COMPATIBLE"
+    v      = s["compatibility_verdict"]
+    if v == "CRITICAL":
+        verdict = "🚨 CRITICAL — silent data corruption risk, immediate action required"
+    elif v == "BREAKING":
+        verdict = "⚠️  BREAKING — version bump required"
+    else:
+        verdict = "✓ COMPATIBLE"
     print(f"\n[schema_analyzer] {cid}")
     print(f"  Older snapshot : {result['older_snapshot']}")
     print(f"  Newer snapshot : {result['newer_snapshot']}")
-    print(f"  Changes        : {s['total_changes']}  (breaking={s['breaking']}, compatible={s['compatible']})")
+    print(
+        f"  Changes        : {s['total_changes']}  "
+        f"(critical={s.get('critical',0)}, breaking={s['breaking']}, compatible={s['compatible']})"
+    )
     print(f"  Verdict        : {verdict}")
     for line in result.get("migration_checklist", []):
         print(f"    {line}")

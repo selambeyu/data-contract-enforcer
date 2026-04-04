@@ -1,12 +1,13 @@
 {
   "contract_id": "week4-brownfield-cartographer-lineage",
-  "diff_generated_at": "2026-04-04T11:59:52.640454+00:00",
+  "diff_generated_at": "2026-04-04T18:43:38.284552+00:00",
   "older_snapshot": "schema_snapshots/week4-brownfield-cartographer-lineage/20260404T064027Z.yaml",
   "newer_snapshot": "schema_snapshots/week4-brownfield-cartographer-lineage/20260404T115824Z.yaml",
   "older_captured_at": "2026-04-04T06:40:27.738223+00:00",
   "newer_captured_at": "2026-04-04T11:58:24.126732+00:00",
   "summary": {
     "total_changes": 1,
+    "critical": 0,
     "breaking": 0,
     "compatible": 1,
     "requires_version_bump": false,
@@ -22,7 +23,8 @@
         "FILE",
         "PIPELINE"
       ],
-      "reason": "Adding enum values is compatible if consumers handle unknown values."
+      "reason": "Adding enum values is compatible if consumers handle unknown values.",
+      "consumer_impact": []
     }
   ],
   "migration_checklist": [

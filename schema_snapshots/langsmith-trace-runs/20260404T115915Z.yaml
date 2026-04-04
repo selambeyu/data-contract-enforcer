@@ -1,0 +1,117 @@
+contract_id: langsmith-trace-runs
+snapshot_version: 20260404T115915Z
+captured_at: '2026-04-04T11:59:15.373162+00:00'
+schema:
+  id:
+    type: string
+    required: true
+    llm_annotations:
+      description: Unique identifier for each trace run
+      business_rule: Must be unique across all trace runs in the table
+      cross_column_note: Cannot be null and must match one of the values in the name
+        or run_type columns
+      annotated_by: llm
+    description: Unique identifier for each trace run
+  name:
+    type: string
+    required: true
+    llm_annotations:
+      description: A unique identifier for each trace run.
+      business_rule: The name must be unique within each trace run.
+      cross_column_note: Name is not dependent on adjacent columns.
+      annotated_by: llm
+    description: A unique identifier for each trace run.
+  run_type:
+    type: string
+    required: true
+    enum:
+    - chain
+    - llm
+    - tool
+    llm_annotations:
+      description: The run type indicates the tool or chain used to generate the trace.
+      business_rule: Run types must be either 'chain' or 'tool'.
+      cross_column_note: No dependency on adjacent columns.
+      annotated_by: llm
+    description: The run type indicates the tool or chain used to generate the trace.
+  error:
+    type: string
+    required: false
+    enum:
+    - evidence_not_found
+    llm_annotations:
+      description: A unique identifier for each trace run.
+      business_rule: The error field must be non-empty and not equal to the word evidence_not_found
+      cross_column_note: null
+      annotated_by: llm
+    description: A unique identifier for each trace run.
+  start_time:
+    type: string
+    required: true
+    llm_annotations:
+      description: The start time of a trace run in ISO 8601 format
+      business_rule: Values must be in the future relative to the end time
+      cross_column_note: Dependent on end_time and run_type
+      annotated_by: llm
+    description: The start time of a trace run in ISO 8601 format
+  end_time:
+    type: string
+    required: true
+    llm_annotations:
+      description: The end time of a trace run in ISO 8601 format
+      business_rule: End times must be later than start times and not earlier than
+        the current date
+      cross_column_note: Dependent on start_time
+      annotated_by: llm
+    description: The end time of a trace run in ISO 8601 format
+  total_tokens:
+    type: integer
+    required: true
+    minimum: 0
+    llm_annotations:
+      description: The total number of tokens in the trace run.
+      business_rule: The value must be a non-negative integer.
+      cross_column_note: Dependent on prompt_tokens and completion_tokens.
+      annotated_by: llm
+    description: The total number of tokens in the trace run.
+  prompt_tokens:
+    type: integer
+    required: true
+    minimum: 0
+    llm_annotations:
+      description: The number of tokens in each trace run.
+      business_rule: Tokens must be a positive integer.
+      cross_column_note: Dependent on total_tokens and completion_tokens.
+      annotated_by: llm
+    description: The number of tokens in each trace run.
+  completion_tokens:
+    type: integer
+    required: true
+    minimum: 0
+    llm_annotations:
+      description: The number of completion tokens in each trace run.
+      business_rule: Tokens must be non-negative integers.
+      cross_column_note: Dependent on total_tokens and prompt_tokens.
+      annotated_by: llm
+    description: The number of completion tokens in each trace run.
+  total_cost:
+    type: number
+    required: true
+    minimum: 0
+    llm_annotations:
+      description: The total cost of the trace run in units of tokens
+      business_rule: Total cost must be greater than zero and less than or equal to
+        the total number of tokens
+      cross_column_note: Total cost is dependent on total_tokens
+      annotated_by: llm
+    description: The total cost of the trace run in units of tokens
+  parent_run_id:
+    type: string
+    required: false
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  session_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$

@@ -1,0 +1,70 @@
+{
+  "contract_id": "week3-document-refinery-extractions",
+  "version": "1.0.0",
+  "snapshot_version": "v2",
+  "captured_at": "2026-04-03T12:00:00+00:00",
+  "schema": {
+    "doc_id": {
+      "type": "string",
+      "required": true,
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "source_hash": {
+      "type": "string",
+      "required": true
+    },
+    "extraction_model": {
+      "type": "string",
+      "required": true,
+      "enum": [
+        "docling-layout-v1",
+        "layout-v1",
+        "layout-vision-fallback-v1",
+        "vision-ocr-v1",
+        "vision-v1"
+      ]
+    },
+    "processing_time_ms": {
+      "type": "integer",
+      "required": true,
+      "minimum": 0
+    },
+    "extracted_at": {
+      "type": "string",
+      "required": true,
+      "format": "date-time",
+      "description": "ISO 8601 datetime string."
+    },
+    "fact_fact_id": {
+      "type": "string",
+      "required": true,
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "fact_text": {
+      "type": "string",
+      "required": true
+    },
+    "fact_confidence": {
+      "type": "number",
+      "required": true,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Confidence score. Must remain 0.0\u20131.0 float. BREAKING CHANGE if changed to 0\u2013100 integer percentage."
+    },
+    "fact_page_ref": {
+      "type": "number",
+      "required": false,
+      "minimum": 0
+    },
+    "_new_optional_field": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "_simulation": {
+    "breaking_removed": "source_path",
+    "compatible_added": "_new_optional_field"
+  }
+}

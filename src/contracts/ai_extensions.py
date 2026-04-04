@@ -33,7 +33,9 @@ import json
 import math
 import os
 import re
+import uuid
 from collections import Counter
+from datetime import datetime, timezone
 from pathlib import Path
 import argparse
 
@@ -415,6 +417,147 @@ def _synthesise_verdicts_from_traces(traces: list[dict]) -> list[dict]:
     return verdicts
 
 
+# ── Violation log integration ─────────────────────────────────────────────────
+
+# Severity mapping for AI extension check statuses
+_AI_CHECK_SEVERITY = {
+    # (check_name, status) → severity
+    ("embedding_drift",          "WARN"): "HIGH",
+    ("embedding_drift",          "FAIL"): "CRITICAL",
+    ("prompt_schema_validation", "WARN"): "MEDIUM",
+    ("prompt_schema_validation", "FAIL"): "HIGH",
+    ("llm_output_violation_rate","WARN"): "HIGH",
+    ("llm_output_violation_rate","FAIL"): "CRITICAL",
+}
+
+_AI_CONTRACT_ID = "langsmith-trace-runs"  # The AI pipeline's contract
+
+
+def _write_violation_log_entries(
+    check_results: dict,
+    violation_log_path: Path = Path("violation_log/violations.jsonl"),
+) -> list[str]:
+    """
+    For each AI extension check result that is WARN or FAIL, write a
+    spec-compliant violation entry into violation_log/violations.jsonl.
+
+    The entry follows the same schema as ViolationAttributor output so that
+    the ReportGenerator and any downstream tooling can process it uniformly:
+      violation_id, check_id, contract_id, source_path, detected_at,
+      severity, failing_check, blame_chain, blast_radius
+
+    Returns a list of violation_ids written.
+    """
+    written_ids = []
+    now_iso = datetime.now(timezone.utc).isoformat()
+
+    violation_log_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(violation_log_path, "a") as fh:
+        for check_name, result in check_results.items():
+            status = result.get("status", "PASS")
+            if status not in ("WARN", "FAIL"):
+                continue
+
+            severity = _AI_CHECK_SEVERITY.get((check_name, status), "MEDIUM")
+            vid = str(uuid.uuid4())
+
+            # Build a minimal check_id aligned with the dot-scoped convention
+            check_id = f"{_AI_CONTRACT_ID}.{check_name}.{status.lower()}"
+
+            # Failing check block — mirrors ValidationRunner output format
+            failing_check = {
+                "check_type":     check_name,
+                "actual_value":   _summarise_actual(check_name, result),
+                "expected":       _summarise_expected(check_name, result),
+                "message":        result.get("message", ""),
+                "records_failing": _count_failing(check_name, result),
+            }
+
+            # Blame chain: AI extensions have no git blame — attribute to the
+            # LangSmith external system (Tier 3) with low confidence
+            blame_chain = [{
+                "rank":             1,
+                "file_path":        "outputs/traces/runs.jsonl",
+                "commit_hash":      "n/a (Tier 3 — external system, no git access)",
+                "author":           "langsmith-external",
+                "commit_timestamp": now_iso,
+                "commit_message":   f"AI extension threshold crossed: {check_name} status={status}",
+                "confidence_score": 0.0,
+            }]
+
+            # Blast radius: the AI extensions subscriber is week7-ai-extensions
+            blast_radius = {
+                "affected_nodes": [{
+                    "node_id":                "week7-ai-extensions",
+                    "label":                  "week7-ai-extensions",
+                    "tier":                   3,
+                    "fields_consumed":        _fields_for_check(check_name),
+                    "matched_breaking_fields": _fields_for_check(check_name),
+                    "contact":                "week7-team",
+                    "validation_mode":        "AUDIT",
+                }],
+                "affected_pipelines": ["week7-ai-extensions-pipeline"],
+                "estimated_records":  result.get("total_outputs", result.get("total_records", 0)),
+            }
+
+            entry = {
+                "violation_id":  vid,
+                "check_id":      check_id,
+                "contract_id":   _AI_CONTRACT_ID,
+                "source_path":   "outputs/traces/runs.jsonl",
+                "detected_at":   now_iso,
+                "severity":      severity,
+                "failing_check": failing_check,
+                "blame_chain":   blame_chain,
+                "blast_radius":  blast_radius,
+            }
+            fh.write(json.dumps(entry) + "\n")
+            written_ids.append(vid)
+
+    return written_ids
+
+
+def _summarise_actual(check_name: str, result: dict) -> str:
+    if check_name == "embedding_drift":
+        return f"drift_score={result.get('drift_score')}, cosine_similarity={result.get('cosine_similarity')}"
+    if check_name == "prompt_schema_validation":
+        n = result.get("violating_records", 0)
+        t = result.get("total_records", 0)
+        return f"{n}/{t} records violating ({result.get('violation_rate', 0)*100:.2f}%)"
+    if check_name == "llm_output_violation_rate":
+        n = result.get("schema_violations", 0)
+        t = result.get("total_outputs", 0)
+        return f"violation_rate={result.get('violation_rate', 0)*100:.2f}% ({n}/{t}), trend={result.get('trend','unknown')}"
+    return str(result.get("status", ""))
+
+
+def _summarise_expected(check_name: str, result: dict) -> str:
+    if check_name == "embedding_drift":
+        return f"drift_score <= {result.get('threshold', 0.25)} (PASS)"
+    if check_name == "prompt_schema_validation":
+        return "0 records violating prompt input schema"
+    if check_name == "llm_output_violation_rate":
+        return f"violation_rate < {result.get('warn_threshold', 0.02)*100:.1f}% (WARN threshold)"
+    return "status=PASS"
+
+
+def _count_failing(check_name: str, result: dict) -> int:
+    if check_name == "prompt_schema_validation":
+        return result.get("violating_records", 0)
+    if check_name == "llm_output_violation_rate":
+        return result.get("schema_violations", 0)
+    return 0
+
+
+def _fields_for_check(check_name: str) -> list[str]:
+    return {
+        "embedding_drift":           ["extracted_facts", "fact_text"],
+        "prompt_schema_validation":  ["doc_id", "source_path", "content_preview"],
+        "llm_output_violation_rate": ["overall_verdict", "outputs"],
+    }.get(check_name, [check_name])
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main() -> None:
@@ -439,6 +582,11 @@ def main() -> None:
         "--baseline-cache",
         default="schema_snapshots/embedding_baselines/week3_centroid.json",
         help="Path to store/load embedding centroid baseline",
+    )
+    parser.add_argument(
+        "--violation-log",
+        default="violation_log/violations.jsonl",
+        help="Append WARN/FAIL entries to this violation log (default: violation_log/violations.jsonl)",
     )
     args = parser.parse_args()
 
@@ -495,6 +643,18 @@ def main() -> None:
     with open(output_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\n[ai_extensions] Written: {output_path}")
+
+    # ── Violation log integration ──────────────────────────────────────────────
+    # Write WARN/FAIL entries into the shared violation log so ReportGenerator
+    # and downstream tooling can process AI extension breaches uniformly.
+    written_ids = _write_violation_log_entries(results, Path(args.violation_log))
+    if written_ids:
+        print(
+            f"[ai_extensions] {len(written_ids)} violation(s) written to {args.violation_log} "
+            f"(id(s): {', '.join(v[:8] for v in written_ids)})"
+        )
+    else:
+        print(f"[ai_extensions] No WARN/FAIL thresholds crossed — violation log unchanged.")
 
 
 if __name__ == "__main__":

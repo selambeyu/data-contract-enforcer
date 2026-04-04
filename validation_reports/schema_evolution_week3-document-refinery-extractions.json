@@ -1,12 +1,13 @@
 {
   "contract_id": "week3-document-refinery-extractions",
-  "diff_generated_at": "2026-04-04T11:59:52.629852+00:00",
+  "diff_generated_at": "2026-04-04T18:43:38.268858+00:00",
   "older_snapshot": "schema_snapshots/week3-document-refinery-extractions/20260404T064018Z.yaml",
   "newer_snapshot": "schema_snapshots/week3-document-refinery-extractions/20260404T115805Z.yaml",
   "older_captured_at": "2026-04-04T06:40:18.971468+00:00",
   "newer_captured_at": "2026-04-04T11:58:05.806839+00:00",
   "summary": {
     "total_changes": 0,
+    "critical": 0,
     "breaking": 0,
     "compatible": 0,
     "requires_version_bump": false,

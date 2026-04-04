@@ -1,0 +1,54 @@
+contract_id: langsmith-trace-runs
+snapshot_version: 20260404T064117Z
+captured_at: '2026-04-04T06:41:17.614391+00:00'
+schema:
+  id:
+    type: string
+    required: true
+  name:
+    type: string
+    required: true
+  run_type:
+    type: string
+    required: true
+    enum:
+    - chain
+    - llm
+    - tool
+  error:
+    type: string
+    required: false
+    enum:
+    - evidence_not_found
+  start_time:
+    type: string
+    required: true
+  end_time:
+    type: string
+    required: true
+  total_tokens:
+    type: integer
+    required: true
+    minimum: 0
+  prompt_tokens:
+    type: integer
+    required: true
+    minimum: 0
+  completion_tokens:
+    type: integer
+    required: true
+    minimum: 0
+  total_cost:
+    type: number
+    required: true
+    minimum: 0
+  parent_run_id:
+    type: string
+    required: false
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+  session_id:
+    type: string
+    required: true
+    format: uuid
+    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
